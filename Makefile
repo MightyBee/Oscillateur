@@ -1,1 +1,3 @@
-first try 
+all: essai
+
+essai : essai.cc
