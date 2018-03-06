@@ -13,8 +13,10 @@ public:
 	void set_coord(unsigned int n, double newValeur); // modifie la n-ieme coordonnee du vecteur
 	//autres operations
 	void affiche(); // affiche le vecteur
-	
+
 private:
 	//attributs
-	std::vector<double> coord; // tableau dynamique contenant les coordonees du vecteur 
+	std::vector<double> coord; // tableau dynamique contenant les coordonees du vecteur
 };
+
+//okaay
