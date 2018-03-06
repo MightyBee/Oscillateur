@@ -1,0 +1,5 @@
+[Question P1.1] Comment représentez-vous ces vecteurs ? Comment sont-ils organisés : quels attributs ? quelles méthodes ? quels droits d'accès ?
+	R :
+	
+[Question P1.2] Quel choix avez vous fait pour les opérations entre vecteurs de dimensions différentes ?
+	R :

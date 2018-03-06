@@ -1,0 +1,94 @@
+# Simon MERKT & Timothée DAO
+
+# PROGRESSION
+
+[V] créer le JOURNAL                                   	001
+[V] lire complètement le descriptif général            	020
+[V] s'inscrire en binôme                               	003
+[ ] fusionner les deux projets                         	???
+[ ] Makefile                                           	???
+[ ] Vecteur finie (pleinement opérationnelle et testée)	???
+[ ] fichier REPONSES                                   	???
+[ ] Oscillateur                                        	???
+[ ] intégrateur d'Euler-Cromer                         	???
+[ ] Pendule                                            	???
+[ ] Ressor                                             	???
+[ ] Systeme                                            	???
+[ ] exerciceP10                                        	???
+[ ] graphisme: cadre général                           	???
+[ ] graphisme: Pendule                                 	???
+[ ] OscillateurCouple                                  	???
+[ ] PenduleDouble                                      	???
+[ ] espace des phases                                  	???
+[ ] integrateur Newmark                                	???
+[ ] fichier CONCEPTION                                 	???
+[ ] fichier README                                     	???
+[ ] fichier NOMS                                       	???
+
+
+======================================================================
+# A FAIRE (PROCHAINE ETAPE)
+
+Simon:
+
+Timothée:
+
+======================================================================
+# SUIVI
+
+## Semaine 2 :
+
+
+
+--------------------------------------------------
+## Semaine 3 :
+
+
+
+--------------------------------------------------
+## Semaine 4 :
+
+
+
+--------------------------------------------------
+## Semaine 5 :
+
+
+
+--------------------------------------------------
+## Semaine 6 :
+
+
+
+--------------------------------------------------
+## Semaine 7 :
+
+
+
+--------------------------------------------------
+## Semaine 8 :
+
+
+
+--------------------------------------------------
+## Semaine 9 :
+
+
+
+--------------------------------------------------
+## Semaine 10 :
+
+
+
+--------------------------------------------------
+## Semaine 11 :
+
+
+
+--------------------------------------------------
+## Semaine 12 :
+
+
+
+--------------------------------------------------
+## Semaine 13 :
