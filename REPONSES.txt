@@ -1,5 +1,14 @@
 [Question P1.1] Comment représentez-vous ces vecteurs ? Comment sont-ils organisés : quels attributs ? quelles méthodes ? quels droits d'accès ?
 	R :
-	
+	Les vecteurs seront des objets avec pour attribut un tableau dynamique de doubles (en private). Outre les méthodes proposées,
+	nous avons ajouté une méthode permettant d'accéeder à la taille du vecteur en question. Pour pouvoir effectuer la comparasion
+	entre deux vectors, nous avons ajouté une méthode private retournant la n-ième coordonnées du vector.
+	À ce stade, nous ne savons pas encore exactement ce qui sera utile à l'utilisateur, nous avons donc mis uniquement le tableau
+	dynmaique (vector) et la methode get_coord en private mais nous nous réservons le droit de restreindre les droits d'accès à
+	l'utilisateur si nous voyons qu'ils ne lui sont pas indispensables.
+
 [Question P1.2] Quel choix avez vous fait pour les opérations entre vecteurs de dimensions différentes ?
 	R :
+	Nous avons décidé de prendre en compte le vecteur de plus grande dimension et d'ajouter des 0 aux "dimensions manquantes" du
+	vecteur de dimension plus petite. Comme cela nous n'avons pas de parte d'informations. Cependant nous prévenons tout de même
+	l'utilisateur de l'opération de "correction" faite automatiquement.
