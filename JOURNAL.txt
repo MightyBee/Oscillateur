@@ -5,8 +5,8 @@
 [V] créer le JOURNAL                                   	001
 [V] lire complètement le descriptif général            	020
 [V] s'inscrire en binôme                               	003
-[ ] fusionner les deux projets                         	???
-[ ] Makefile                                           	???
+[V] fusionner les deux projets                         	001
+[V] Makefile                                           	030
 [ ] Vecteur finie (pleinement opérationnelle et testée)	???
 [ ] fichier REPONSES                                   	???
 [ ] Oscillateur                                        	???
