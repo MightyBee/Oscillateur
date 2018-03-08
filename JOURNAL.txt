@@ -37,7 +37,10 @@ Timothée:
 # SUIVI
 
 ## Semaine 2 :
-
+Ebauche de la classe Vecteur.
+On a pris de l'avance sur les vidéos du MOOC.
+Mise en place du Makefile.
+Mise en place de Git et Github.
 
 
 --------------------------------------------------
