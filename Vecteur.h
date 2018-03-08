@@ -6,7 +6,6 @@ class Vecteur {
 public:
 	//accesseurs
 	size_t taille() const;
-	double get_coord(unsigned int n) const;
 	bool compare(Vecteur v2) const;
 	//manipulateurs
 	void augmente(double newCoord); // ajoute une dimension au vecteur et une valeur pour cette dimension
@@ -17,6 +16,8 @@ public:
 private:
 	//attributs
 	std::vector<double> coord; // tableau dynamique contenant les coordonees du vecteur
+	//accessuers
+	double get_coord(unsigned int n) const;
 };
 
 //okaay
