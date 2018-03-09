@@ -1,6 +1,14 @@
 CXX = g++
 CC  = $(CXX)
 
+# Les différents répertoires
+CDIR=code
+HDIR=head
+ODIR=obj
+EDIR=exe
+
+BIN=testVecteur
+
 CXXFLAGS = -std=c++1z
 
 # Partie commentÃ©e : choisissez les options que vous voulez avoir
@@ -12,10 +20,20 @@ CXXFLAGS += -g                      # pour debugger
 # LDFLAGS  += -pg                   # pour profiler
 # CXXFLAGS += -O2                   # pour optimiser la vitesse
 
-all: testVecteur
+# Où trouver les différents sources *.cpp qu'il faudra compiler pour créer les objets correspondants
+SRC= $(wildcard $(CDIR)/*.cpp)
+OBJ= $(SRC:$(CDIR)/%.cpp=$(ODIR)/%.o)
 
-Vecteur.o: Vecteur.cc Vecteur.h
+all: $(BIN)
 
-testVecteur.o: testVecteur.cc Vecteur.h
+#Création de l'exécutable
+testVecteur: $(OBJ)
 
-testVecteur: testVecteur.o Vecteur.o
+# Création des différents *.o à partir des *.cpp
+$(ODIR)/%.o: $(CDIR)/%.cpp $(HDIR)/%.h
+
+#Vecteur.o: Vecteur.cc Vecteur.h
+
+#testVecteur.o: testVecteur.cc Vecteur.h
+
+#testVecteur: testVecteur.o Vecteur.o
