@@ -28,9 +28,11 @@ all: $(BIN)
 
 #Création de l'exécutable
 testVecteur: $(OBJ)
+	$(CXX) -o $(EDIR)/$@ $^ $(CXXFLAGS)
 
 # Création des différents *.o à partir des *.cpp
 $(ODIR)/%.o: $(CDIR)/%.cpp $(HDIR)/%.h
+	$(CXX) -o $@ -c $< $(CXXFLAGS)
 
 #Vecteur.o: Vecteur.cc Vecteur.h
 
