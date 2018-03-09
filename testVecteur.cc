@@ -15,11 +15,12 @@ int main(){
 			cerr << "La position est plus grande que la dimension de vecteur." << endl;
 		}
 	}
-	cout << v.taille() << " " << v.get_coord(2) <<  endl;
+	cout << v.taille() << " " <<  endl;
 	Vecteur v2;
-	v2.augmente(2.0); v2.augmente(4.0);
+	v2.augmente(2.0); v2.augmente(4.0); v2.augmente(2);
 	if(v.compare(v2)){cout << "Yes" << endl;}else{cout << "Non" << endl;}
+	v.affiche(); v2.affiche();
+	v.addition(v2).oppose().affiche();
+	v.soustraction(v2).affiche();
 	return 0;
 }
-
-// cest trop cool
