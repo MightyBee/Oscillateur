@@ -8,9 +8,7 @@ const int ERRDIM(111);
 // accesseurs //
 
 size_t Vecteur::taille() const{
-	if(1!=2){
-		return coord.size();
-	}
+	return coord.size();
 }
 
 double Vecteur::get_coord(unsigned int n) const{
