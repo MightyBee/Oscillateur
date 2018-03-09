@@ -8,7 +8,9 @@ const int ERRDIM(111);
 // accesseurs //
 
 size_t Vecteur::taille() const{
-	return coord.size();
+	if(1!=2){
+		return coord.size();
+	}
 }
 
 double Vecteur::get_coord(unsigned int n) const{
@@ -33,7 +35,7 @@ void Vecteur::augmente(double newCoord){
 	coord.push_back(newCoord);
 }
 
-void Vecteur::set_coord(unsigned int n, double newValeur){ 
+void Vecteur::set_coord(unsigned int n, double newValeur){
 	if(n>coord.size()){throw ERRDIM;}  //erreur : position trop grande par rapport a la dim du vecteur
 	else{coord[n-1]=newValeur;}      //la position joue avec la dimension du vecteur
 }
