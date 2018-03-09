@@ -26,14 +26,13 @@ OBJ= $(SRC:$(CDIR)/%.cpp=$(ODIR)/%.o)
 
 all: $(BIN)
 
-#Création de l'exécutable
-testVecteur: $(OBJ)
-	$(CXX) -o $(EDIR)/$@ $^ $(CXXFLAGS)
-
 # Création des différents *.o à partir des *.cpp
 $(ODIR)/%.o: $(CDIR)/%.cpp $(HDIR)/%.h
 	$(CXX) -o $@ -c $< $(CXXFLAGS)
 
+#Création de l'exécutable
+testVecteur: $(OBJ)
+	$(CXX) -o $(EDIR)/$@ $^ $(CXXFLAGS)
 #Vecteur.o: Vecteur.cc Vecteur.h
 
 #testVecteur.o: testVecteur.cc Vecteur.h
