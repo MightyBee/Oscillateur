@@ -33,6 +33,46 @@ void Vecteur::set_coord(unsigned int n, double newValeur){
 	else{coord[n-1]=newValeur;}      //la position joue avec la dimension du vecteur
 }
 
+//addition de deux vecteurs
+Vecteur Vecteur::addition(Vecteur autre) const{
+	Vecteur retour;
+	if(coord.size()!= autre.coord.size()){
+		cerr << "Attention: les dimensions des deux vecteurs n'étaient pas les mêmes. Des zéros ont été rajoutés aux dimensions manquantes." << endl;
+	} //gère si les dimenesions sont pas les mêmes: rajoute des zéros
+	double ajout(0.0);
+	for(size_t i(0); i<coord.size() or i<autre.coord.size();i++, ajout=0){
+		if(i<coord.size()) ajout+=coord[i];
+		if(i<autre.coord.size()) ajout+=autre.coord[i];
+		retour.augmente(ajout);
+	}
+	return retour;
+}
+
+//calcul l'opposé d'un vecteur
+Vecteur Vecteur::oppose() const{
+	Vecteur retour;
+	for(auto el : coord){
+		retour.augmente((-1)*el);
+	}
+	return retour;
+}
+
+Vecteur Vecteur::soustraction(Vecteur autre) const{
+	return addition(autre.oppose());
+}
+
+//calcul le produit vectoriel uniquement de deux vecteurs de dimension 3
+Vecteur Vecteur::prod_vect(Vecteur autre) const{
+	Vecteur retour;
+	if(coord.size()==3 and autre.coord.size()==3){
+		retour.augmente((coord[1]*autre.coord[2])-(coord[2]*autre.coord[1]));
+		retour.augmente((coord[2]*autre.coord[0])-(coord[0]*autre.coord[2]));
+		retour.augmente((coord[0]*autre.coord[1])-(coord[1]*autre.coord[0]));
+	}
+	//LANCER UNE ERREUR POUR DIM AUTRE QUE 3
+	return retour;
+}
+
 // autres operations /
 
 void Vecteur::affiche(){
