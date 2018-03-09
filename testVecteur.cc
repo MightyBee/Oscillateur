@@ -18,12 +18,6 @@ int main(){
 	cout << v.taille() << " " <<  endl;
 	Vecteur v2;
 	v2.augmente(2.0); v2.augmente(4.0); v2.augmente(2);
-<<<<<<< HEAD
-=======
-	v.affiche(); v2.affiche();
-	cout << v.prod_scal(v2) << endl;
-	cout << v.prod_scal(v) << " " << v.norme2() << " " << v.norme() << endl;
->>>>>>> getCoord
 	if(v.compare(v2)){cout << "Yes" << endl;}else{cout << "Non" << endl;}
 	v.affiche(); v2.affiche();
 	v.addition(v2).oppose().affiche();
