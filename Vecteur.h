@@ -6,7 +6,6 @@ class Vecteur {
 public:
 	//accesseurs
 	size_t taille() const;
-	double get_coord(unsigned int n) const;
 	bool compare(Vecteur v2) const;
 	//manipulateurs
 	void augmente(double newCoord); // ajoute une dimension au vecteur et une valeur pour cette dimension

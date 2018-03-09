@@ -11,17 +11,12 @@ size_t Vecteur::taille() const{
 	return coord.size();
 }
 
-double Vecteur::get_coord(unsigned int n) const{
-	if(n>coord.size()){throw ERRDIM;}  //erreur : position trop grande par rapport a la dim du vecteur
-	else{return coord[n-1];}
-}
-
 bool Vecteur::compare(Vecteur v2) const{
-	if(coord.size()!=v2.taille()){
+	if(coord.size()!=v2.coord.size()){
 		return false;
 	} else {
 		for(size_t i(0);i<coord.size();i++){
-			if(coord[i]!=v2.get_coord(i+1)){return false;}
+			if(coord[i]!=v2.coord[i]){return false;}
 		}
 		return true;
 	}
