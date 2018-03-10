@@ -12,7 +12,7 @@ CXXFLAGS += -g                      # pour debugger
 # LDFLAGS  += -pg                   # pour profiler
 # CXXFLAGS += -O2                   # pour optimiser la vitesse
 
-all: testVecteur
+all: testVecteur testOscillateur
 
 LIB/Vecteur.o: Oscillateur/SRC/Vecteur.cc Oscillateur/SRC/Vecteur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
@@ -20,5 +20,14 @@ LIB/Vecteur.o: Oscillateur/SRC/Vecteur.cc Oscillateur/SRC/Vecteur.h
 LIB/testVecteur.o: Oscillateur/SRC/testVecteur.cc Oscillateur/SRC/Vecteur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
+LIB/Oscillateur.o: Oscillateur/SRC/Oscillateur.cc Oscillateur/SRC/Oscillateur.h Oscillateur/SRC/Vecteur.h
+	$(CC) $(CXXFLAGS) -c -o $@ $<
+
+LIB/testOscillateur.o: Oscillateur/SRC/testOscillateur.cc Oscillateur/SRC/Oscillateur.h Oscillateur/SRC/Vecteur.h
+	$(CC) $(CXXFLAGS) -c -o $@ $<
+
 testVecteur: LIB/testVecteur.o LIB/Vecteur.o
 	$(CC) $(CXXFLAGS) LIB/testVecteur.o LIB/Vecteur.o -o testVecteur
+
+testOscillateur: LIB/testOscillateur.o LIB/Oscillateur.o LIB/Vecteur.o
+	$(CC) $(CXXFLAGS) LIB/testOscillateur.o LIB/Oscillateur.o LIB/Vecteur.o -o testOscillateur
