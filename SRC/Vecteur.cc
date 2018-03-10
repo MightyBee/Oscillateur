@@ -1,11 +1,16 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <initializer_list>
 #include "Vecteur.h"
 using namespace std;
 
 const int ERRDIM(111);
 
+// constructeurs
+Vecteur::Vecteur(const unsigned int& n) : coord(n,0) {}
+Vecteur::Vecteur(const double& x, const double& y, const double& z) : coord({x,y,z}) {}
+Vecteur::Vecteur(const initializer_list<double>& liste) : coord(liste) {}
 // accesseurs //
 
 size_t Vecteur::taille() const{

@@ -1,10 +1,15 @@
 #pragma once
 #include <vector>
 #include <cmath>
+#include <initializer_list>
 
 
 class Vecteur {
 public:
+	//constructeurs
+	Vecteur(const unsigned int& n=0);
+	Vecteur(const double& x, const double& y, const double& z);
+	Vecteur(const std::initializer_list<double>& liste);
 	//accesseurs
 	size_t taille() const; // retourne la dim du vecteur
 	bool compare(Vecteur v2) const; // retourne vrai/faux si les vecteurs sont les memes
