@@ -22,9 +22,9 @@ int main(){
 	v.affiche(); v2.affiche();
 	v.addition(v2).oppose().affiche();
 	v.soustraction(v2).affiche();
-	Vecteur v3(4); v3.affiche();
-	Vecteur v4(2.0,0,-3.23); v4.affiche();
-	Vecteur v5({2.0,0,-3.24,6,7}); v5.affiche();
-	Vecteur v6(v5); v6.affiche();
+	Vecteur v3(4); v3.affiche(); // test du constructeur n-D initilisant avec des zeros
+	Vecteur v4(2.0,0,-3.23); v4.affiche(); //test du constructeur 3D
+	Vecteur v5({2.0,0,-3.24,6,7}); v5.affiche(); //test du constructeur par liste
+	Vecteur v6(v5); v6.affiche(); //test du constructeur de copie par defaut
 	return 0;
 }
