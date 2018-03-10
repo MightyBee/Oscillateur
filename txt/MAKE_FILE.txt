@@ -14,8 +14,11 @@ CXXFLAGS += -g                      # pour debugger
 
 all: testVecteur
 
-Vecteur.o: Vecteur.cc Vecteur.h
+LIB/Vecteur.o: Oscillateur/SRC/Vecteur.cc Oscillateur/SRC/Vecteur.h
+	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-testVecteur.o: testVecteur.cc Vecteur.h
+LIB/testVecteur.o: Oscillateur/SRC/testVecteur.cc Oscillateur/SRC/Vecteur.h
+	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-testVecteur: testVecteur.o Vecteur.o
+testVecteur: LIB/testVecteur.o LIB/Vecteur.o
+	$(CC) $(CXXFLAGS) LIB/testVecteur.o LIB/Vecteur.o -o testVecteur
