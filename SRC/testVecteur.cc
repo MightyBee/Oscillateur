@@ -45,5 +45,7 @@ int main(){
 	if (v!=v3){
 		cout << v3 << "différent de" << v << endl;
 	} // je veux voir si != est compris automatiquement
+	//conclustion != n'est pas compris automatiquement :)
+	
 	return 0;
 }

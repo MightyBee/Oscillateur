@@ -28,6 +28,10 @@ bool Vecteur::operator==(Vecteur v2) const{
 	}
 }
 
+bool Vecteur::operator!=(Vecteur v2) const{
+	return not operator==(v2);
+}
+
 // manipulateurs //
 
 void Vecteur::augmente(double newCoord){
