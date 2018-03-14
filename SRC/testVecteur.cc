@@ -4,7 +4,7 @@ using namespace std;
 
 
 int main(){
-
+	/*
 	//essai des methodes augmente et affiche
 	cout << "Ajout de dimensions au 1er vecteur : " << endl;
 	Vecteur v1; v1.augmente(2.0); v1.affiche(); v1.augmente(3.0); v1.affiche(); v1.augmente(6.0); v1.affiche();
@@ -34,5 +34,8 @@ int main(){
 	Vecteur v4(2.0,0,-3.23); v4.affiche(); //test du constructeur 3D
 	Vecteur v5({2.0,0,-3.24,6,7}); v5.affiche(); //test du constructeur par liste
 	Vecteur v6(v5); v6.affiche(); //test du constructeur de copie par defaut
+	*/
+	Vecteur v(2,4,5);
+	cout << v;
 	return 0;
 }
