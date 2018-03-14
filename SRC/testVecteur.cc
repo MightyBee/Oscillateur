@@ -39,7 +39,7 @@ int main(){
 	cout << v;
 	Vecteur v2(2,4,5);
 	if(v==v2){
-		cout << "Noice!!"
+		cout << "Noice";
 	} //test de l'operator ==
 	return 0;
 }
