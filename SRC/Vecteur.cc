@@ -17,7 +17,7 @@ size_t Vecteur::taille() const{
 	return coord.size();
 }
 
-bool Vecteur::compare(Vecteur v2) const{
+bool Vecteur::operator==(Vecteur v2) const{
 	if(coord.size()!=v2.coord.size()){
 		return false;
 	} else {

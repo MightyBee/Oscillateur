@@ -12,7 +12,7 @@ public:
 	Vecteur(const std::initializer_list<double>& liste);
 	//accesseurs
 	size_t taille() const; // retourne la dim du vecteur
-	bool compare(Vecteur v2) const; // retourne vrai/faux si les vecteurs sont les memes
+	bool operator==(Vecteur v2) const; // retourne vrai/faux si les vecteurs sont les memes
 	//manipulateurs
 	void augmente(double newCoord); // ajoute une dimension au vecteur et une valeur pour cette dimension
 	void set_coord(unsigned int n, double newValeur); // modifie la n-ieme coordonnee du vecteur
