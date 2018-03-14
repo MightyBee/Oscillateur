@@ -39,7 +39,11 @@ int main(){
 	cout << v;
 	Vecteur v2(2,4,5);
 	if(v==v2){
-		cout << "Noice";
+		cout << "Noice" << endl;
 	} //test de l'operator ==
+	Vecteur v3(2,3,5)
+	if (v!=v3){
+		cout << v3 << "différent de" << v << endl;
+	} // je veux voir si != est compris automatiquement
 	return 0;
 }
