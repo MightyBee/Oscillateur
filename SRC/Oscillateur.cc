@@ -12,5 +12,5 @@ Vecteur Oscillateur::f(const double& t) const{
 
 void Oscillateur::affiche(){
   cout << "P : " << P;
-  cout << "Q : "; Q;
+  cout << "Q : " << Q;
 }
