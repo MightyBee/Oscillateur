@@ -123,6 +123,6 @@ double Vecteur::norme2() const{
 
 
 //opérateur << pour afficher
-ostream& operator<< affiche(ostream& sortie, Vecteur const& v){
+ostream& operator<< (ostream& sortie, Vecteur const& v){
 	return v.affiche(sortie);
 }
