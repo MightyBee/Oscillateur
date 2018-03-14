@@ -33,5 +33,5 @@ private:
 	//accessuers
 };
 
-std::ostream& operator<< affiche(std::ostream& sortie, Vecteur const& v);
+std::ostream& affiche(std::ostream& sortie, Vecteur const& v);
 //okaay
