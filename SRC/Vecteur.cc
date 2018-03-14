@@ -87,9 +87,9 @@ Vecteur Vecteur::prod_vect(Vecteur autre) const{
 
 // affichage des coordonnees du vecteur
 ostream& Vecteur::affiche(ostream& sortie)const{
-	sortie << "("
+	sortie << "(";
 	for(auto el : coord){
-		sortie << "" el << " " ;
+		sortie << el << " " ;
 	}
 	sortie << ")";
 	return sortie;
