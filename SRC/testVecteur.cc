@@ -37,5 +37,9 @@ int main(){
 	*/
 	Vecteur v(2,4,5);
 	cout << v;
+	Vecteur v2(2,4,5);
+	if(v==v2){
+		cout << "Noice!!"
+	} //test de l'operator ==
 	return 0;
 }
