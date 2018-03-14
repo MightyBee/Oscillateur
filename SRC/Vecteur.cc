@@ -82,11 +82,12 @@ Vecteur Vecteur::prod_vect(Vecteur autre) const{
 // autres operations /
 
 // affichage des coordonnees du vecteur
-void Vecteur::affiche(){
+ostream& Vecteur::affiche(ostream& sortie)const{
 	for(auto el : coord){
-		cout << el << " " ;
+		sortie << el << " " ;
 	}
-	cout << endl;
+	sortie << endl;
+	return sortie;
 }
 
 // multiplication du vecteur par un scalaire
@@ -118,4 +119,10 @@ double Vecteur::norme() const{
 // retourne la norme au carre d'un vecteur : c'est <v,v>
 double Vecteur::norme2() const{
 	return prod_scal(*this);
+}
+
+
+//opérateur << pour afficher
+ostream& operator<< affiche(ostream& sortie, Vecteur const& v){
+	return v.affiche(sortie);
 }
