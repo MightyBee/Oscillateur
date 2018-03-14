@@ -21,7 +21,7 @@ public:
 	Vecteur soustraction(Vecteur autre) const;
 	Vecteur prod_vect(Vecteur autre) const;
 	//autres operations
-	std::ostream& Vecteur::affiche(std::ostream& sortie) const;
+	std::ostream& affiche(std::ostream& sortie) const;
 	Vecteur mult(double lambda) const;
 	double prod_scal(Vecteur autre) const;
 	double norme() const;
