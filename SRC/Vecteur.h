@@ -6,6 +6,7 @@
 
 struct Erreur{
 	std::string type;
+	std::string fct;
 	std::string description;
 };
 
@@ -28,7 +29,8 @@ public:
 	Vecteur prod_vect(Vecteur autre) const;
 	Vecteur& operator+=(const Vecteur& v2);
 	//autres operations
-	std::ostream& affiche(std::ostream& sortie) const;
+	std::ostream& affiche(std::ostream& sortie=std::cout) const;
+	std::string to_str() const;
 	Vecteur mult(double lambda) const;
 	double prod_scal(Vecteur autre) const;
 	double norme() const;
