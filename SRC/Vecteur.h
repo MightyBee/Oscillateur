@@ -1,8 +1,13 @@
 #pragma once
 #include <vector>
+#include <string>
 #include <cmath>
 #include <initializer_list>
 
+struct Erreur{
+	std::string type;
+	std::string description;
+};
 
 class Vecteur {
 public:
@@ -21,6 +26,7 @@ public:
 	Vecteur oppose() const;
 	Vecteur soustraction(Vecteur autre) const;
 	Vecteur prod_vect(Vecteur autre) const;
+	Vecteur& operator+=(const Vecteur& v2);
 	//autres operations
 	std::ostream& affiche(std::ostream& sortie) const;
 	Vecteur mult(double lambda) const;
