@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cmath>
 #include <initializer_list>
 #include "Vecteur.h"
@@ -87,7 +88,7 @@ Vecteur Vecteur::prod_vect(Vecteur autre) const{
 
 // affichage des coordonnees du vecteur
 ostream& Vecteur::affiche(ostream& sortie)const{
-	sortie << "(";
+	sortie << "( ";
 	for(auto el : coord){
 		sortie << el << " " ;
 	}
@@ -130,4 +131,11 @@ double Vecteur::norme2() const{
 //opérateur << pour afficher
 ostream& operator<< (ostream& sortie, Vecteur const& v){
 	return v.affiche(sortie);
+}
+
+Vecteur& Vecteur::operator+=(const Vecteur& v2){
+	for(size_t i(0);i<coord.size();i++){
+		coord[i]+=v2.coord[i];
+	}
+	return *this;
 }
