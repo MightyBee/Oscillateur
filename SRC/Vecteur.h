@@ -12,7 +12,8 @@ public:
 	Vecteur(const std::initializer_list<double>& liste);
 	//accesseurs
 	size_t taille() const; // retourne la dim du vecteur
-	bool compare(Vecteur v2) const; // retourne vrai/faux si les vecteurs sont les memes
+	bool operator==(Vecteur v2) const; // retourne vrai/faux si les vecteurs sont les memes
+	bool operator!=(Vecteur v2) const;
 	//manipulateurs
 	void augmente(double newCoord); // ajoute une dimension au vecteur et une valeur pour cette dimension
 	void set_coord(unsigned int n, double newValeur); // modifie la n-ieme coordonnee du vecteur
@@ -21,7 +22,7 @@ public:
 	Vecteur soustraction(Vecteur autre) const;
 	Vecteur prod_vect(Vecteur autre) const;
 	//autres operations
-	void affiche(); // affiche le vecteur
+	std::ostream& affiche(std::ostream& sortie) const;
 	Vecteur mult(double lambda) const;
 	double prod_scal(Vecteur autre) const;
 	double norme() const;
@@ -33,4 +34,5 @@ private:
 	//accessuers
 };
 
+std::ostream& operator<<(std::ostream& sortie, Vecteur const& v);
 //okaay
