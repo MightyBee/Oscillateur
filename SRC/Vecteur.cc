@@ -131,3 +131,41 @@ double Vecteur::norme2() const{
 ostream& operator<< (ostream& sortie, Vecteur const& v){
 	return v.affiche(sortie);
 }
+
+Vecteur& Vecteur::operator+=(const Vecteur& v2){
+	for(size_t i(0);i<coord.size();i++){
+		coord[i]+=v2.coord[i];
+	}
+	return *this;
+}
+
+Vecteur& Vecteur::operator-=(const Vecteur& v2){
+	for(size_t i(0);i<coord.size();i++){
+		coord[i]-=v2.coord[i];
+	}
+	return *this;
+}
+
+//ooperator + passé en surcharge interne
+Vecteur Vecteur::operator+(const Vecteur& v) const{
+    return Vecteur(*this) += v;
+}
+
+//operator - passé en surchage interne
+Vecteur Vecteur::operator-(const Vecteur& v) const{
+		return Vecteur(*this) -= v;
+}
+
+//operator - en interne. cette fois pour remplacer oppose()
+Vecteur Vecteur::operator-() const{
+	Vecteur retour;
+	for(auto el : coord){
+		retour.augmente((-1)*el);
+	}
+	return retour;
+}
+
+//multiplication en externe
+const Vecteur operator*(double lambda, Vecteur const& v){
+	return v.mult(lambda);
+}

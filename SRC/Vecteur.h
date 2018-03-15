@@ -21,6 +21,13 @@ public:
 	Vecteur oppose() const;
 	Vecteur soustraction(Vecteur autre) const;
 	Vecteur prod_vect(Vecteur autre) const;
+
+	Vecteur& operator+=(const Vecteur& v2);
+	Vecteur& operator-=(const Vecteur& v2);
+	Vecteur operator+(const Vecteur& v) const;
+	Vecteur operator-(const Vecteur& v) const;
+	Vecteur operator-() const;
+
 	//autres operations
 	std::ostream& affiche(std::ostream& sortie) const;
 	Vecteur mult(double lambda) const;
@@ -36,3 +43,6 @@ private:
 
 std::ostream& operator<<(std::ostream& sortie, Vecteur const& v);
 //okaay
+
+//multiplication en externe
+const Vecteur operator*(double lambda, Vecteur const& v);
