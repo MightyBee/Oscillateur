@@ -42,6 +42,7 @@ int main(){
 		cout << v9 << "différent de" << v7 << endl;
 	} // je veux voir si != est compris automatiquement
 	//conclustion != n'est pas compris automatiquement :)
+
 	Vecteur v10(1,1,1);
 	v10+=v7;
 	cout << v10 << endl;
@@ -53,5 +54,6 @@ int main(){
 		cerr << "Description   : " << err.description << endl;
 		cerr << "### FIN DU PROGRAMME ###" << endl << endl;
 	}
+
 	return 0;
 }

@@ -13,9 +13,9 @@ struct Erreur{
 class Vecteur {
 public:
 	//constructeurs
-	Vecteur(const unsigned int& n=0);
-	Vecteur(const double& x, const double& y, const double& z);
-	Vecteur(const std::initializer_list<double>& liste);
+	explicit Vecteur(const unsigned int& n=0);
+	explicit Vecteur(const double& x, const double& y, const double& z);
+	explicit Vecteur(const std::initializer_list<double>& liste);
 	//accesseurs
 	size_t taille() const; // retourne la dim du vecteur
 	bool operator==(Vecteur v2) const; // retourne vrai/faux si les vecteurs sont les memes
@@ -27,7 +27,14 @@ public:
 	Vecteur oppose() const;
 	Vecteur soustraction(Vecteur autre) const;
 	Vecteur prod_vect(Vecteur autre) const;
+
+
 	Vecteur& operator+=(const Vecteur& v2);
+	Vecteur& operator-=(const Vecteur& v2);
+	Vecteur operator+(const Vecteur& v) const;
+	Vecteur operator-(const Vecteur& v) const;
+	Vecteur operator-() const;
+
 	//autres operations
 	std::ostream& affiche(std::ostream& sortie=std::cout) const;
 	std::string to_str() const;
@@ -44,3 +51,6 @@ private:
 
 std::ostream& operator<<(std::ostream& sortie, Vecteur const& v);
 //okaay
+
+//multiplication en externe
+const Vecteur operator*(double lambda, Vecteur const& v);
