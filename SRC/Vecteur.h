@@ -32,14 +32,7 @@ public:
 	Vecteur& operator*=(const double& lambda);
 
 	//autres operations
-<<<<<<< HEAD
-	std::ostream& affiche(std::ostream& sortie) const;
-=======
 	std::ostream& affiche(std::ostream& sortie=std::cout) const;
-	std::string to_str() const;
-	Vecteur mult(double lambda) const;
-	double prod_scal(Vecteur autre) const;
->>>>>>> eff55a92b60b1ebfe2fa131684623ae5bfe30398
 	double norme() const;
 	double norme2() const;
 

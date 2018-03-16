@@ -13,7 +13,7 @@ int main(){
 	cout << "Modification de la 2eme coordonnee : " << endl;
 	v1.set_coord(2,4.0); v1.affiche();
 	cout << "Modification de la 4eme coordonnee : " << endl;
-	v1.set_coord(4,20.0); v1.affiche();
+	v1.set_coord(3,20.0); v1.affiche();
 	// Essai de la methode taille
 	cout << "Taille du 1er vecteur : " << v1.taille() << " " <<  endl;
 	//Essai de la fonction compare
@@ -24,9 +24,11 @@ int main(){
 	cout << "v1 et v2 sont-ils égaux ?" << endl;
 	if(v1==v2){cout << "Yes" << endl;}else{cout << "Non" << endl;}
 	//Essai des methode addition, opppose et soustraction
-	v1.addition(v2).oppose().affiche();
-	v1.soustraction(v2).affiche();
+
+	v1^v2;
+
 	Vecteur v3(4); v3.affiche(); // test du constructeur n-D initilisant avec des zeros
+	v1^v3;
 	Vecteur v4(2.0,0,-3.23); v4.affiche(); //test du constructeur 3D
 	Vecteur v5({2.0,0,-3.24,6,7}); v5.affiche(); //test du constructeur par liste
 	Vecteur v6(v5); v6.affiche(); //test du constructeur de copie par defaut
@@ -42,24 +44,12 @@ int main(){
 		cout << v9 << "différent de" << v7 << endl;
 	} // je veux voir si != est compris automatiquement
 	//conclustion != n'est pas compris automatiquement :)
-<<<<<<< HEAD
-	Vecteur v4(1,1,1);
-	v4-=v;
-	v4*=2.5;
-	cout << v4 << endl;
-
-	//v -= v4;
-	cout << v << endl;
-	cout << v + v4 << endl;
-	//cout << v - v4 << endl;
-	cout << -v << endl;
-	//cout << 7 * v << endl;
-=======
 
 	Vecteur v10(1,1,1);
 	v10+=v7;
 	cout << v10 << endl;
-	cout << v10.to_str() << endl;}
+	//cout << v10.to_str() << endl;
+}
 	catch(Erreur err){
 		cerr << endl << endl << "### ERREUR FATALE ###" << endl;
 		cerr << "Type d'erreur : " << err.type << endl;
@@ -67,7 +57,6 @@ int main(){
 		cerr << "Description   : " << err.description << endl;
 		cerr << "### FIN DU PROGRAMME ###" << endl << endl;
 	}
->>>>>>> eff55a92b60b1ebfe2fa131684623ae5bfe30398
 
 	return 0;
 }

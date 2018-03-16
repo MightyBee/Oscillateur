@@ -42,7 +42,7 @@ void Vecteur::set_coord(unsigned int n, double newValeur){
 	if(n>coord.size()){              //erreur : position trop grande par rapport a la dim du vecteur
 		Erreur err;
 		err.type="dimension";
-		err.fct="Vecteur::set_cord(unsigned int n, double newValeur)";
+		err.fct="Vecteur::set_cord(unsigned int, double)";
 		err.description="L'indice de position fourni en argument ("+to_string(n)+") ";
 		err.description+="est plus grande que la dimension du vecteur ("+to_string(coord.size())+").";
 		throw err;
@@ -58,6 +58,10 @@ Vecteur Vecteur::operator^(const Vecteur& v2) const{
                  	(coord[0]*v2.coord[1])-(coord[1]*v2.coord[0]));
 	} else {
 		Erreur err;
+		err.type="dimension";
+		err.fct="Vecteur::operator^(const Vecteur&), i.e. produit vectoriel";
+		err.description="Les dimensions des vecteurs ("+to_string(coord.size())+" et "+to_string(v2.coord.size());
+		err.description+=") ne correspondent pas à celles attendues (3 et 3).";
 		throw err;
 	}
 }
@@ -74,25 +78,6 @@ ostream& Vecteur::affiche(ostream& sortie)const{
 	return sortie;
 }
 
-<<<<<<< HEAD
-=======
-string Vecteur::to_str() const{
-	string retour("(");
-	for (auto el : coord){
-		retour+=to_string(el)+" ";
-	}
-	return retour.substr(0,retour.size()-1)+")";
-}
-
-// multiplication du vecteur par un scalaire
-Vecteur Vecteur::mult(double lambda) const{
-	Vecteur retour;
-	for(auto el : coord){
-		retour.augmente(lambda*el);
-	}
-	return retour;
-}
->>>>>>> eff55a92b60b1ebfe2fa131684623ae5bfe30398
 
 // produit scalaire entre deux vecteurs
 double Vecteur::operator*(const Vecteur& v2) const{
