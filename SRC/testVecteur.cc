@@ -49,6 +49,7 @@ int main(){
 	Vecteur v4(1,1,1);
 	v4+=v;
 	cout << v4 << endl;
+
 	v -= v4;
 	cout << v << endl;
 	cout << v + v4 << endl;
