@@ -6,7 +6,6 @@
 #include "Vecteur.h"
 using namespace std;
 
-const int ERRDIM(111);
 
 // constructeurs
 explicit Vecteur::Vecteur(const unsigned int& n) : coord(n,0) {}
@@ -40,7 +39,14 @@ void Vecteur::augmente(double newCoord){
 }
 
 void Vecteur::set_coord(unsigned int n, double newValeur){
-	if(n>coord.size()){throw ERRDIM;}  //erreur : position trop grande par rapport a la dim du vecteur
+	if(n>coord.size()){              //erreur : position trop grande par rapport a la dim du vecteur
+		Erreur err;
+		err.type="dimension";
+		err.fct="Vecteur::set_cord(unsigned int n, double newValeur)";
+		err.description="L'indice de position fourni en argument ("+to_string(n)+") ";
+		err.description+="est plus grande que la dimension du vecteur ("+to_string(coord.size())+").";
+		throw err;
+	}
 	else{coord[n-1]=newValeur;}      //la position joue avec la dimension du vecteur
 }
 
@@ -94,6 +100,14 @@ ostream& Vecteur::affiche(ostream& sortie)const{
 	}
 	sortie << ")";
 	return sortie;
+}
+
+string Vecteur::to_str() const{
+	string retour("(");
+	for (auto el : coord){
+		retour+=to_string(el)+" ";
+	}
+	return retour.substr(0,retour.size()-1)+")";
 }
 
 // multiplication du vecteur par un scalaire
