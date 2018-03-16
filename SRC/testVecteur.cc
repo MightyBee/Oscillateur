@@ -47,15 +47,16 @@ int main(){
 	} // je veux voir si != est compris automatiquement
 	//conclustion != n'est pas compris automatiquement :)
 	Vecteur v4(1,1,1);
-	v4+=v;
+	v4-=v;
+	v4*=2.5;
 	cout << v4 << endl;
 
-	v -= v4;
+	//v -= v4;
 	cout << v << endl;
 	cout << v + v4 << endl;
-	cout << v - v4 << endl;
+	//cout << v - v4 << endl;
 	cout << -v << endl;
-	cout << 7 * v << endl;
+	//cout << 7 * v << endl;
 
 	return 0;
 }

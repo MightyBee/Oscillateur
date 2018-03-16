@@ -9,16 +9,16 @@ using namespace std;
 const int ERRDIM(111);
 
 // constructeurs
-explicit Vecteur::Vecteur(const unsigned int& n) : coord(n,0) {}
-explicit Vecteur::Vecteur(const double& x, const double& y, const double& z) : coord({x,y,z}) {}
-explicit Vecteur::Vecteur(const initializer_list<double>& liste) : coord(liste) {}
+Vecteur::Vecteur(const unsigned int& n) : coord(n,0) {}
+Vecteur::Vecteur(const double& x, const double& y, const double& z) : coord({x,y,z}) {}
+Vecteur::Vecteur(const initializer_list<double>& liste) : coord(liste) {}
 // accesseurs //
 
 size_t Vecteur::taille() const{
 	return coord.size();
 }
 
-bool Vecteur::operator==(Vecteur v2) const{
+bool Vecteur::operator==(const Vecteur& v2) const{
 	if(coord.size()!=v2.coord.size()){
 		return false;
 	} else {
@@ -29,7 +29,7 @@ bool Vecteur::operator==(Vecteur v2) const{
 	}
 }
 
-bool Vecteur::operator!=(Vecteur v2) const{
+bool Vecteur::operator!=(const Vecteur& v2) const{
 	return not operator==(v2);
 }
 
@@ -44,44 +44,16 @@ void Vecteur::set_coord(unsigned int n, double newValeur){
 	else{coord[n-1]=newValeur;}      //la position joue avec la dimension du vecteur
 }
 
-//addition de deux vecteurs
-Vecteur Vecteur::addition(Vecteur autre) const{
-	Vecteur retour;
-	if(coord.size()!= autre.coord.size()){
-		cerr << "Attention: les dimensions des deux vecteurs n'étaient pas les mêmes. Des zéros ont été rajoutés aux dimensions manquantes." << endl;
-	} //gère si les dimenesions sont pas les mêmes: rajoute des zéros
-	double ajout(0.0);
-	for(size_t i(0); i<coord.size() or i<autre.coord.size();i++, ajout=0){
-		if(i<coord.size()) ajout+=coord[i];
-		if(i<autre.coord.size()) ajout+=autre.coord[i];
-		retour.augmente(ajout);
-	}
-	return retour;
-}
-
-//calcul l'opposé d'un vecteur
-Vecteur Vecteur::oppose() const{
-	Vecteur retour;
-	for(auto el : coord){
-		retour.augmente((-1)*el);
-	}
-	return retour;
-}
-
-Vecteur Vecteur::soustraction(Vecteur autre) const{
-	return addition(autre.oppose());
-}
-
 //calcul le produit vectoriel uniquement de deux vecteurs de dimension 3
-Vecteur Vecteur::prod_vect(Vecteur autre) const{
-	Vecteur retour;
-	if(coord.size()==3 and autre.coord.size()==3){
-		retour.augmente((coord[1]*autre.coord[2])-(coord[2]*autre.coord[1]));
-		retour.augmente((coord[2]*autre.coord[0])-(coord[0]*autre.coord[2]));
-		retour.augmente((coord[0]*autre.coord[1])-(coord[1]*autre.coord[0]));
+Vecteur Vecteur::operator^(const Vecteur& v2) const{
+	if(coord.size()==3 and v2.coord.size()==3){
+		return Vecteur((coord[1]*v2.coord[2])-(coord[2]*v2.coord[1]),
+                 	(coord[2]*v2.coord[0])-(coord[0]*v2.coord[2]),
+                 	(coord[0]*v2.coord[1])-(coord[1]*v2.coord[0]));
+	} else {
+		Erreur err;
+		throw err;
 	}
-	//LANCER UNE ERREUR POUR DIM AUTRE QUE 3
-	return retour;
 }
 
 // autres operations /
@@ -96,23 +68,12 @@ ostream& Vecteur::affiche(ostream& sortie)const{
 	return sortie;
 }
 
-// multiplication du vecteur par un scalaire
-Vecteur Vecteur::mult(double lambda) const{
-	Vecteur retour;
-	for(auto el : coord){
-		retour.augmente(lambda*el);
-	}
-	return retour;
-}
 
-/* produit scalaire entre deux vecteurs, si ils n'ont pas la meme dim, pas
-besoin de rajouter des zeros au vecteur de dim plus petite car alors toutes
-les contributions des coordonnees des dims "sup" apporteraient une
-contribution nulle*/
-double Vecteur::prod_scal(Vecteur autre) const{
+// produit scalaire entre deux vecteurs
+double Vecteur::operator*(const Vecteur& v2) const{
 	double retour(0.0);
-	for(size_t i(0);i<coord.size() and i<autre.taille();i++){
-		retour+=coord[i]*autre.coord[i];
+	for(size_t i(0);i<coord.size();i++){
+		retour+=coord[i]*v2.coord[i];
 	}
 	return retour;
 }
@@ -124,12 +85,12 @@ double Vecteur::norme() const{
 
 // retourne la norme au carre d'un vecteur : c'est <v,v>
 double Vecteur::norme2() const{
-	return prod_scal(*this);
+	return (*this)*(*this);
 }
 
 
 //opérateur << pour afficher
-ostream& operator<< (ostream& sortie, Vecteur const& v){
+ostream& operator<<(ostream& sortie, const Vecteur& v){
 	return v.affiche(sortie);
 }
 
@@ -142,32 +103,41 @@ Vecteur& Vecteur::operator+=(const Vecteur& v2){
 
 
 Vecteur& Vecteur::operator-=(const Vecteur& v2){
-	for(size_t i(0);i<coord.size();i++){
-		coord[i]-=v2.coord[i];
+	operator+=(-v2);
+	return *this;
+}
+
+Vecteur& Vecteur::operator*=(const double& lambda){
+	for(auto& el : coord){
+		el*=lambda;
 	}
 	return *this;
 }
 
-//ooperator + passé en surcharge interne
-Vecteur Vecteur::operator+(const Vecteur& v) const{
-    return Vecteur(*this) += v;
+//ooperator + passé en surcharge externe
+const Vecteur operator+(Vecteur v1, const Vecteur& v2){
+	v1+=v2;
+	return v1;
 }
 
 //operator - passé en surchage interne
-Vecteur Vecteur::operator-(const Vecteur& v) const{
-		return Vecteur(*this) -= v;
+const Vecteur operator-(Vecteur v1, const Vecteur& v2){
+	v1-=v2;
+	return v1;
 }
 
 //operator - en interne. cette fois pour remplacer oppose()
-Vecteur Vecteur::operator-() const{
-	Vecteur retour;
-	for(auto el : coord){
-		retour.augmente((-1)*el);
-	}
-	return retour;
+const Vecteur operator-(Vecteur v){
+	v*=-1;
+	return v;
 }
 
 //multiplication en externe
-const Vecteur operator*(double lambda, Vecteur const& v){
-	return v.mult(lambda);
+const Vecteur operator*(const double& lambda, Vecteur v){
+	v*=lambda;
+	return v;
+}
+
+const Vecteur operator*(const Vecteur& v, const double& lambda){
+	return lambda*v;
 }
