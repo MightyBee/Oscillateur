@@ -50,5 +50,12 @@ int main(){
 	v4+=v;
 	cout << v4 << endl;
 
+	v -= v4;
+	cout << v << endl;
+	cout << v + v4 << endl;
+	cout << v - v4 << endl;
+	cout << -v << endl;
+	cout << 7 * v << endl;
+
 	return 0;
 }
