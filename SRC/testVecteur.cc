@@ -53,6 +53,7 @@ int main(){
 	catch(Erreur err){
 		cerr << endl << endl << "### ERREUR FATALE ###" << endl;
 		cerr << "Type d'erreur : " << err.type << endl;
+		cerr << "Dans fichier  : testVecteur.cc" << endl;
 		cerr << "Dans fonction : " << err.fct << endl;
 		cerr << "Description   : " << err.description << endl;
 		cerr << "### FIN DU PROGRAMME ###" << endl << endl;
