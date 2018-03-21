@@ -12,8 +12,18 @@ public:
                        const std::initializer_list<double>& liQ);
 
   Vecteur f(const double& t) const;
+
+  void affiche();
+  //accesseurs
+  Vecteur get_P() const;
+  Vecteur get_Q() const;
+  //manipulateurs
+  void set_P(Vecteur const& p);
+  void set_Q(Vecteur const& q);
+
   std::ostream& affiche(std::ostream& sortie=std::cout) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
-private:
+
+ private:
   Vecteur P;
   Vecteur Q;
 };
