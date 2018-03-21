@@ -10,18 +10,18 @@ int main(){
 	cout << "Ajout de dimensions au 1er vecteur : " << endl;
 	Vecteur v1; v1.augmente(2.0); v1.affiche(); v1.augmente(3.0); v1.affiche(); v1.augmente(6.0); v1.affiche();
 	//essai de la methode set_coord
-	cout << "Modification de la 2eme coordonnee : " << endl;
+	cout << endl << "Modification de la 2eme coordonnee : " << endl;
 	v1.set_coord(2,4.0); v1.affiche();
-	cout << "Modification de la 4eme coordonnee : " << endl;
+	cout << endl << "Modification de la 4eme coordonnee : " << endl;
 	v1.set_coord(3,20.0); v1.affiche();
 	// Essai de la methode taille
-	cout << "Taille du 1er vecteur : " << v1.taille() << " " <<  endl;
+	cout << endl << "Taille du 1er vecteur : " << v1.taille() << " " <<  endl;
 	//Essai de la fonction compare
 	Vecteur v2; v2.augmente(2.0); v2.augmente(4.0); v2.augmente(2);
 	cout << "Création du 2eme vecteur ... --> "; v2.affiche();
-	cout << "v1 : "; v1.affiche();
-	cout << "v2 : "; v2.affiche();
-	cout << "v1 et v2 sont-ils égaux ?" << endl;
+	cout << endl << "v1 : "; v1.affiche();
+	cout << endl << "v2 : "; v2.affiche();
+	cout << endl << "v1 et v2 sont-ils égaux ?" << endl;
 	if(v1==v2){cout << "Yes" << endl;}else{cout << "Non" << endl;}
 	//Essai des methode addition, opppose et soustraction
 
@@ -53,6 +53,7 @@ int main(){
 	catch(Erreur err){
 		cerr << endl << endl << "### ERREUR FATALE ###" << endl;
 		cerr << "Type d'erreur : " << err.type << endl;
+		cerr << "Dans fichier  : testVecteur.cc" << endl;
 		cerr << "Dans fonction : " << err.fct << endl;
 		cerr << "Description   : " << err.description << endl;
 		cerr << "### FIN DU PROGRAMME ###" << endl << endl;
