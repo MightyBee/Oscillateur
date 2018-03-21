@@ -23,9 +23,27 @@ public:
 
   std::ostream& affiche(std::ostream& sortie=std::cout) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
 
- private:
+protected:
   Vecteur P;
   Vecteur Q;
 };
 
 std::ostream& operator<<(std::ostream& sortie, const Oscillateur& osc);
+
+class Pendule :public Oscillateur{
+private:
+  double L;
+  double m;
+  double frott;
+  Vecteur axe;
+  Vecteur origine;
+};
+
+class Ressort :public Oscillateur{
+private:
+  double k;
+  double m;
+  double frott;
+  Vecteur axe;
+  Vecteur origine;
+};
