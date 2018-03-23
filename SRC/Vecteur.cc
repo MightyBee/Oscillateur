@@ -40,7 +40,7 @@ bool Vecteur::operator!=(const Vecteur& v2) const{
 	return not operator==(v2);
 }
 
-// retoourne le produit vectoriel du vecteur courant avec un autre vecteur 3D //
+// retourne le produit vectoriel du vecteur courant avec un autre vecteur 3D //
 Vecteur Vecteur::operator^(const Vecteur& v2) const{
 	if(coord.size()==3 and v2.coord.size()==3){
 		return Vecteur((coord[1]*v2.coord[2])-(coord[2]*v2.coord[1]),
