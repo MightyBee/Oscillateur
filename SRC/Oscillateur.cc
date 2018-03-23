@@ -1,5 +1,6 @@
 #include <iostream>
 #include <initializer_list>
+#include <cmath>
 #include "Oscillateur.h"
 #include "Vecteur.h"
 using namespace std;
@@ -78,6 +79,15 @@ void Oscillateur::set_Q(const Vecteur& q){
   }
   else{
     Q=q;}
+}
+
+// permet de modifier une vitesse de l'Oscillateur
+void Oscillateur::set_Q(unsigned int n, double newValeur){
+  try{Q.set_coord(n,newValeur);}
+  catch(Erreur err){
+    err.fct+=" appelée par Oscillateur::set_Q(unsigned int, double)";
+    throw err;
+  }
 }
 
 
