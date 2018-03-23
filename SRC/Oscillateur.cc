@@ -11,15 +11,15 @@ using namespace std;
 ##############################################################################*/
 
 //#############################  constructeurs  ##############################//
-// construit un Oscillateur à n degrés de liberté, avec tous les parametres à zéro
+// construit un Oscillateur à n degrés de liberté, avec tous les parametres à zéro //
 Oscillateur::Oscillateur(const unsigned int& n) : P(n),Q(n) {}
 
-// construit un Oscillateur à 3 degrés de liberté
+// construit un Oscillateur à 3 degrés de liberté //
 Oscillateur::Oscillateur(const double& Px, const double& Py, const double& Pz,
                          const double& Qx, const double& Qy, const double& Qz)
                         : P(Px,Py,Pz), Q(Qx,Qy,Qz) {}
 
-// construit un Oscillateur à partir d'une liste pour les paramètres et une autre pour leurs dérivées
+// construit un Oscillateur à partir d'une liste pour les paramètres et une autre pour leurs dérivées //
 Oscillateur::Oscillateur(const initializer_list<double>& liP,
                          const initializer_list<double>& liQ)
                         : P(liP), Q(liQ)
@@ -43,7 +43,7 @@ Vecteur Oscillateur::get_Q() const{return Q;}
 
 
 //#############################  manipulateurs  ##############################//
-// permet de modifier l'intégralités des paramètres
+// permet de modifier l'intégralité des paramètres //
 void Oscillateur::set_P(Vecteur const& p){
   if(p.taille() != P.taille()){
     Erreur r;
@@ -57,7 +57,7 @@ void Oscillateur::set_P(Vecteur const& p){
     P=p;}
 }
 
-// permet de modifier l'intégralité des "vitesses"
+// permet de modifier l'intégralité des "vitesses" //
 void Oscillateur::set_Q(Vecteur const& q){
   if(q.taille() != Q.taille()){
     Erreur r;
@@ -73,13 +73,13 @@ void Oscillateur::set_Q(Vecteur const& q){
 
 
 //###########################  autres opérations  ############################//
-// fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur
+// fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur //
 Vecteur Oscillateur::f(const double& t) const{
   Vecteur retour(P.taille());
   return retour;
 }
 
-// permet l'affichage d'un oscillateur de façon standardisée
+// permet l'affichage d'un oscillateur de façon standardisée //
 ostream& Oscillateur::affiche(ostream& sortie)const{
   sortie << "# Oscillateur" << endl;
   sortie << P << " # parametre" << endl;
