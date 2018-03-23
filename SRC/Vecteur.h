@@ -33,6 +33,7 @@ class Vecteur {
 
 
 		//accesseurs
+		double get_coord(unsigned int n) const; // accès à un paramètre
 		size_t taille() const; // retourne la dim du vecteur
 
 		//manipulateurs
