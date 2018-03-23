@@ -16,9 +16,10 @@ int main(){
   cout << p1 << q1 << endl;
   Vecteur p(4,5,6);
   Vecteur q(1,2,3);
+  o1.set_P(4,1.9);
   q.augmente(4);
   o1.set_P(p);
-  cout << o1.get_P() << endl;
+  cout << o1 << endl;
   o1.set_Q(q);
   cout << o1.get_Q() << endl;
 
@@ -28,7 +29,7 @@ int main(){
   cout << osc1 << osc2 << osc3 << endl;
   Oscillateur osc4({1,2},{3,4});
   cout << osc4 << endl;
-  Oscillateur osc5({1,2},{3,4,5});
+  Oscillateur osc5({1,2},{3,4});
   cout << osc5 << endl;
   }catch(Erreur err){
     cerr << endl << endl << "### ERREUR FATALE ###" << endl;

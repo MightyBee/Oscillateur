@@ -44,27 +44,36 @@ Vecteur Oscillateur::get_Q() const{return Q;}
 
 //#############################  manipulateurs  ##############################//
 // permet de modifier l'intégralité des paramètres //
-void Oscillateur::set_P(Vecteur const& p){
+void Oscillateur::set_P(const Vecteur& p){
   if(p.taille() != P.taille()){
     Erreur r;
     r.type="dimension";
     r.fct="Oscillateur::set_P(Vecteur const&)";
-    r.description="Les dimensions des vecteurs ("+to_string(p.taille())+" et "+to_string(P.taille())+")";
-    r.description+=" ne sont pas les mêmes.";
+    r.description="La dimension attendue du vecteur passé en paramètre était "+to_string(P.taille())+", ";
+    r.description+="et non pas "+to_string(p.taille());
     throw r;
   }
   else{
     P=p;}
 }
 
+// permet de modifier un paramètre de l'Oscillateur
+void Oscillateur::set_P(unsigned int n, double newValeur){
+  try{P.set_coord(n,newValeur);}
+  catch(Erreur err){
+    err.fct+=" appelée par Oscillateur::set_P(unsigned int, double)";
+    throw err;
+  }
+}
+
 // permet de modifier l'intégralité des "vitesses" //
-void Oscillateur::set_Q(Vecteur const& q){
+void Oscillateur::set_Q(const Vecteur& q){
   if(q.taille() != Q.taille()){
     Erreur r;
     r.type="dimension";
     r.fct="Oscillateur::set_Q(Vecteur const&)";
-    r.description="Les dimensions des vecteurs ("+to_string(q.taille())+" et "+to_string(Q.taille())+")";
-    r.description+=" ne sont pas les mêmes.";
+    r.description="La dimension attendue du vecteur passé en paramètre était "+to_string(Q.taille())+", ";
+    r.description+="et non pas "+to_string(q.taille());
     throw r;
   }
   else{

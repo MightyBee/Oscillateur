@@ -17,8 +17,9 @@ class Oscillateur{
     Vecteur get_Q() const; // retourne le vecteur des "vitesses" de l'oscillateur
 
     //manipulateurs
-    void set_P(Vecteur const& p); // permet de modifier l'intégralité des paramètres
-    void set_Q(Vecteur const& q); // permet de modifier l'intégralité des "vitesses"
+    void set_P(const Vecteur& p); // permet de modifier l'intégralité des paramètres
+    void set_P(unsigned int n, double newValeur);
+    void set_Q(const Vecteur& q); // permet de modifier l'intégralité des "vitesses"
 
     //autres opérations
     Vecteur f(const double& t) const; // fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur
