@@ -3,7 +3,6 @@
 #include <cmath>
 #include "Oscillateur.h"
 #include "Vecteur.h"
-#include "constantes.h"
 using namespace std;
 
 /*##############################################################################

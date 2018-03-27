@@ -41,7 +41,7 @@ class Vecteur {
 		void set_coord(unsigned int n, double newValeur); // modifie la n-ieme coordonnee du vecteur
 
 		//autres operations
-		std::ostream& affiche(std::ostream& sortie=std::cout) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
+		std::ostream& affiche(std::ostream& sortie=std::cout) const; // permet d'afficher le vecteur par composants sur un flot de sortie
 		double norme() const; // retourne la norme de l'instance courante
 		double norme2() const; // retourne la norme au carré de l'instance courante
 
