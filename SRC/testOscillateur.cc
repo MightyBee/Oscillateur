@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Vecteur.h"
 #include "Oscillateur.h"
+#include "constantes.h"
 using namespace std;
 
 int main(){
