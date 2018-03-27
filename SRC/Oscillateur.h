@@ -7,8 +7,6 @@ class Oscillateur{
   public:
     //constructeurs
     explicit Oscillateur(const unsigned int& n=3); // construit un Oscillateur à n degrés de liberté, avec tous les parametres à zéro
-    explicit Oscillateur(const double& Px, const double& Py, const double& Pz, // construit un Oscillateur à 3 degrés de liberté
-                         const double& Qx, const double& Qy, const double& Qz);
     explicit Oscillateur(const std::initializer_list<double>& liP, // construit un Oscillateur à 3 degrés de libert
                          const std::initializer_list<double>& liQ);
 
@@ -34,6 +32,12 @@ class Oscillateur{
 std::ostream& operator<<(std::ostream& sortie, const Oscillateur& osc); // permet l'affichage standard : sortie << oscillateur;
 
 class Pendule :public Oscillateur{
+public:
+  //constructeur
+  explicit Pendule(const std::initializer_list<double>& liP,
+                       const std::initializer_list<double>& liQ,
+                     double longueur, double masse, double coeff, Vecteur axe, Vecteur origine);
+
 private:
   double L;
   double m;
