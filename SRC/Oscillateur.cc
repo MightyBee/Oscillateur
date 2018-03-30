@@ -2,6 +2,7 @@
 #include <initializer_list>
 #include "Oscillateur.h"
 #include "Vecteur.h"
+#include "constantes.h"
 #include <cmath>
 using namespace std;
 
@@ -110,14 +111,46 @@ ostream& operator<<(ostream& sortie, const Oscillateur& osc){
 ###                    METHODES DE LA CLASSE Pendule                         ###
 ###                                                                          ###
 ##############################################################################*/
+//constructeur
+Pendule::Pendule(const std::initializer_list<double>& liP
+                ,const std::initializer_list<double>& liQ
+                ,const std::initializer_list<double>& liO
+                ,const std::initializer_list<double>& lia
+                ,double longueur, double masse, double frottement)
+                    :Oscillateur(liP, liQ, liO, lia) //TODO ERREUR
+                    , L(longueur), m(masse), frott(frottement){}
 
-Pendule::Pendule(const std::initializer_list<double>& liP,
-                     const std::initializer_list<double>& liQ,
-                   double longueur, double masse, double coeff, Vecteur axe, Vecteur origine)
-                   :Oscillateur(liP, liQ) //TODO ERREUR
-                   , L(longueur), m(masse), frott(coeff), axe(axe), origine(origine){
-                   }
-
+//fonction d'évolution
 Vecteur Pendule::f(const double& t) const{
-   
+    Vecteur retour(1);
+    retour.set_coord(1,(-(g.get_coord(3)/L)*sin(P.get_coord(1))-(frott*Q.get_coord(1)/m*L*L)));
+    return retour;
+}
+//retourne position d'un pendule
+Vecteur Pendule::position()const{
+  return O + L*cos(P.get_coord(1))*g+L*sin(P.get_coord(1))*a;
+}
+
+/*##############################################################################
+###                                                                          ###
+###                    METHODES DE LA CLASSE Ressort                         ###
+###                                                                          ###
+##############################################################################*/
+//constructeur
+Ressort::Ressort(const std::initializer_list<double>& liP
+                ,const std::initializer_list<double>& liQ
+                ,const std::initializer_list<double>& liO
+                ,const std::initializer_list<double>& lia
+                ,double raideur,double masse, double frottement)
+                    :Oscillateur(liP,liQ,liO,lia)//TODO ERREUR
+                    ,k(raideur), m(masse), frott(frottement){}
+//fonction d'évolution
+Vecteur Ressort::f(const double& t) const{
+    Vecteur retour(1);
+    retour.set_coord(1,(-(k/m)*P.get_coord(1)-(frott/m)*Q.get_coord(1)+g*a));
+    return retour;
+}
+//retourne la position d'un ressort
+Vecteur Ressort::position()const{
+    return O + P.get_coord(1)*a;
 }

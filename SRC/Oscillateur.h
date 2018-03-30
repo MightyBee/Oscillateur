@@ -1,7 +1,7 @@
 #pragma once
 #include <initializer_list>
 #include "Vecteur.h"
-
+#include "constantes.h"
 
 class Oscillateur{
   public:
@@ -9,7 +9,10 @@ class Oscillateur{
     explicit Oscillateur(const unsigned int& n=3); // construit un Oscillateur à n degrés de liberté, avec tous les parametres à zéro
     explicit Oscillateur(const std::initializer_list<double>& liP, // construit un Oscillateur à 3 degrés de libert
                          const std::initializer_list<double>& liQ);
-
+    explicit Oscillateur(const std::initializer_list<double>& liP, //construit un Oscillateur avec son origine et son axe
+                         const std::initializer_list<double>& liQ,
+                         const std::initializer_list<double>& liO,
+                         const std::initializer_list<double>& lia);
     //accesseurs
     Vecteur get_P() const; // retourne le vecteur des paramètres de l'oscillateur
     Vecteur get_Q() const; // retourne le vecteur des "vitesses" de l'oscillateur
@@ -22,11 +25,14 @@ class Oscillateur{
     //autres opérations
     Vecteur f(const double& t) const; // fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur
     std::ostream& affiche(std::ostream& sortie=std::cout) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
+    Vecteur position()const;
 
   protected:
     //attributs
     Vecteur P; // vecteur contenant les paramètres de l'oscillateur
     Vecteur Q; // vecteur contenenat les dérivées des paramètres
+    Vecteur O; //vecteur représentant la position de référence (origine)
+    Vecteur a; //vecteur représentant la direction principale (axe)
 };
 
 std::ostream& operator<<(std::ostream& sortie, const Oscillateur& osc); // permet l'affichage standard : sortie << oscillateur;
@@ -34,23 +40,35 @@ std::ostream& operator<<(std::ostream& sortie, const Oscillateur& osc); // perme
 class Pendule :public Oscillateur{
 public:
   //constructeur
-  explicit Pendule(const std::initializer_list<double>& liP,
-                       const std::initializer_list<double>& liQ,
-                     double longueur, double masse, double coeff, Vecteur axe, Vecteur origine);
+  explicit Pendule(const std::initializer_list<double>& liP
+                  ,const std::initializer_list<double>& liQ
+                  ,const std::initializer_list<double>& liO
+                  ,const std::initializer_list<double>& lia
+                  ,double longueur, double masse, double frottement);
+  //autres opérations
+  Vecteur f(const double& t) const;
+  Vecteur position()const;
 
 private:
   double L;
   double m;
   double frott;
-  Vecteur axe;
-  Vecteur origine;
 };
 
 class Ressort :public Oscillateur{
+public:
+  //constructeur
+  explicit Ressort(const std::initializer_list<double>& liP
+                  ,const std::initializer_list<double>& liQ
+                  ,const std::initializer_list<double>& liO
+                  ,const std::initializer_list<double>& lia
+                  ,double raideur,double masse, double frottement);
+  //autre fonctions
+  Vecteur f(const double& t) const;
+  Vecteur position()const;
+
 private:
   double k;
   double m;
   double frott;
-  Vecteur axe;
-  Vecteur origine;
 };

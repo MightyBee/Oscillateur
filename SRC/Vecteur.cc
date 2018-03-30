@@ -87,6 +87,11 @@ Vecteur& Vecteur::operator*=(const double& lambda){
 
 
 //##############################  accesseurs  ################################//
+// accès à un paramètre
+double Vecteur::get_coord(unsigned int n) const{                 //TODO excption
+	return coord[n-1];
+}
+
 // retourne la dimension du vecteur //
 size_t Vecteur::taille() const{
 	return coord.size();
