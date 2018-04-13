@@ -30,6 +30,20 @@ Oscillateur::Oscillateur(const initializer_list<double>& liP,
                           }
                         }
 
+Oscillateur::Oscillateur(const initializer_list<double>& liP,
+                         const initializer_list<double>& liQ,
+                         const initializer_list<double>& liO,
+                         const initializer_list<double>& lia)
+                        : P(liP), Q(liQ), O(liO), a(lia)
+                        {if(liP.size()!=liQ.size()){
+                            Erreur err;
+                            err.type="dimension";
+                        		err.fct="Oscillateur::Oscillateur(const initializer_list<double>&, const initializer_list<double>&)";
+                    		    err.description="Les dimensions des vecteurs 'parametre' et 'vitesse' doivent être les mêmes ";
+                        		err.description+="(ici : "+to_string(liP.size())+" et "+to_string(liQ.size())+")";
+                            throw err;
+                          }
+                        }
 
 //##############################  accesseurs  ################################//
 // retourne le vecteur des paramètres de l'oscillateur //

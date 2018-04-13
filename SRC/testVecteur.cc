@@ -8,30 +8,30 @@ int main(){
 	try{
 	//essai des methodes augmente et affiche
 	cout << "Ajout de dimensions au 1er vecteur : " << endl;
-	Vecteur v1; v1.augmente(2.0); v1.affiche(); v1.augmente(3.0); v1.affiche(); v1.augmente(6.0); v1.affiche();
+	Vecteur v1; v1.augmente(2.0); v1.affiche(cout); v1.augmente(3.0); v1.affiche(cout); v1.augmente(6.0); v1.affiche(cout);
 	//essai de la methode set_coord
 	cout << endl << "Modification de la 2eme coordonnee : " << endl;
-	v1.set_coord(2,4.0); v1.affiche();
+	v1.set_coord(2,4.0); v1.affiche(cout);
 	cout << endl << "Modification de la 4eme coordonnee : " << endl;
-	v1.set_coord(3,20.0); v1.affiche();
+	v1.set_coord(3,20.0); v1.affiche(cout);
 	// Essai de la methode taille
 	cout << endl << "Taille du 1er vecteur : " << v1.taille() << " " <<  endl;
 	//Essai de la fonction compare
 	Vecteur v2; v2.augmente(2.0); v2.augmente(4.0); v2.augmente(2);
-	cout << "Création du 2eme vecteur ... --> "; v2.affiche();
-	cout << endl << "v1 : "; v1.affiche();
-	cout << endl << "v2 : "; v2.affiche();
+	cout << "Création du 2eme vecteur ... --> "; v2.affiche(cout);
+	cout << endl << "v1 : "; v1.affiche(cout);
+	cout << endl << "v2 : "; v2.affiche(cout);
 	cout << endl << "v1 et v2 sont-ils égaux ?" << endl;
 	if(v1==v2){cout << "Yes" << endl;}else{cout << "Non" << endl;}
 	//Essai des methode addition, opppose et soustraction
 
 	v1^v2;
 
-	Vecteur v3(4); v3.affiche(); // test du constructeur n-D initilisant avec des zeros
+	Vecteur v3(4); v3.affiche(cout); // test du constructeur n-D initilisant avec des zeros
 	v1^v3;
-	Vecteur v4(2.0,0,-3.23); v4.affiche(); //test du constructeur 3D
-	Vecteur v5({2.0,0,-3.24,6,7}); v5.affiche(); //test du constructeur par liste
-	Vecteur v6(v5); v6.affiche(); //test du constructeur de copie par defaut
+	Vecteur v4(2.0,0,-3.23); v4.affiche(cout); //test du constructeur 3D
+	Vecteur v5({2.0,0,-3.24,6,7}); v5.affiche(cout); //test du constructeur par liste
+	Vecteur v6(v5); v6.affiche(cout); //test du constructeur de copie par defaut
 
 	Vecteur v7(2,4,5);
 	cout << v7;
