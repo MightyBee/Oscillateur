@@ -5,6 +5,7 @@
 #include <initializer_list>
 
 
+
 struct Erreur{ // definit le type Erreur que l'on lance s'il y a ... une erreur
 	std::string type;
 	std::string fct;
