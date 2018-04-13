@@ -3,6 +3,8 @@
 #include <cmath>
 #include "Oscillateur.h"
 #include "Vecteur.h"
+#include "constantes.h"
+#include <cmath>
 using namespace std;
 
 /*##############################################################################
@@ -14,12 +16,6 @@ using namespace std;
 //#############################  constructeurs  ##############################//
 // construit un Oscillateur à n degrés de liberté, avec tous les parametres à zéro //
 Oscillateur::Oscillateur(const unsigned int& n) : P(n),Q(n) {}
-
-// construit un Oscillateur à 3 degrés de liberté //
-Oscillateur::Oscillateur(const double& Px, const double& Py, const double& Pz,
-                         const double& Qx, const double& Qy, const double& Qz)
-                        : P(Px,Py,Pz), Q(Qx,Qy,Qz) {}
-
 // construit un Oscillateur à partir d'une liste pour les paramètres et une autre pour leurs dérivées //
 Oscillateur::Oscillateur(const initializer_list<double>& liP,
                          const initializer_list<double>& liQ)
@@ -117,4 +113,54 @@ ostream& Oscillateur::affiche(ostream& sortie)const{
 // permet l'affichage standard : sortie << oscillateur; //
 ostream& operator<<(ostream& sortie, const Oscillateur& osc){
 	return osc.affiche(sortie);
+}
+
+
+/*##############################################################################
+###                                                                          ###
+###                    METHODES DE LA CLASSE Pendule                         ###
+###                                                                          ###
+##############################################################################*/
+//constructeur
+Pendule::Pendule(const std::initializer_list<double>& liP
+                ,const std::initializer_list<double>& liQ
+                ,const std::initializer_list<double>& liO
+                ,const std::initializer_list<double>& lia
+                ,double longueur, double masse, double frottement)
+                    :Oscillateur(liP, liQ, liO, lia) //TODO ERREUR
+                    , L(longueur), m(masse), frott(frottement){}
+
+//fonction d'évolution
+Vecteur Pendule::f(const double& t) const{
+    Vecteur retour(1);
+    retour.set_coord(1,(-(g.get_coord(3)/L)*sin(P.get_coord(1))-(frott*Q.get_coord(1)/m*L*L)));
+    return retour;
+}
+//retourne position d'un pendule
+Vecteur Pendule::position()const{
+  return O + L*cos(P.get_coord(1))*g+L*sin(P.get_coord(1))*a;
+}
+
+/*##############################################################################
+###                                                                          ###
+###                    METHODES DE LA CLASSE Ressort                         ###
+###                                                                          ###
+##############################################################################*/
+//constructeur
+Ressort::Ressort(const std::initializer_list<double>& liP
+                ,const std::initializer_list<double>& liQ
+                ,const std::initializer_list<double>& liO
+                ,const std::initializer_list<double>& lia
+                ,double raideur,double masse, double frottement)
+                    :Oscillateur(liP,liQ,liO,lia)//TODO ERREUR
+                    ,k(raideur), m(masse), frott(frottement){}
+//fonction d'évolution
+Vecteur Ressort::f(const double& t) const{
+    Vecteur retour(1);
+    retour.set_coord(1,(-(k/m)*P.get_coord(1)-(frott/m)*Q.get_coord(1)+g*a));
+    return retour;
+}
+//retourne la position d'un ressort
+Vecteur Ressort::position()const{
+    return O + P.get_coord(1)*a;
 }
