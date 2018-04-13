@@ -121,11 +121,11 @@ void Vecteur::set_coord(unsigned int n, double newValeur){
 //###########################  autres opérations  ############################//
 // affichage des coordonnees du vecteur //
 ostream& Vecteur::affiche(ostream& sortie)const{
-	sortie << "( ";
+	//sortie << "( ";
 	for(auto el : coord){
 		sortie << el << " " ;
 	}
-	sortie << ")";
+	//sortie << ")";
 	return sortie;
 }
 

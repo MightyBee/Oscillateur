@@ -19,11 +19,12 @@ class Oscillateur{
 
     //manipulateurs
     void set_P(const Vecteur& p); // permet de modifier l'intégralité des paramètres
-    void set_P(unsigned int n, double newValeur);
+    void set_P(unsigned int n, double newValeur); // permet de modifier un des paramètre
     void set_Q(const Vecteur& q); // permet de modifier l'intégralité des "vitesses"
+    void set_Q(unsigned int n, double newValeur); // permet de modifier une des "vitesses"
 
     //autres opérations
-    Vecteur f(const double& t) const; // fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur
+    Vecteur f(const double& t=0) const; // fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur
     std::ostream& affiche(std::ostream& sortie=std::cout) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
     Vecteur position()const;
 

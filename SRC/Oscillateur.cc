@@ -1,5 +1,6 @@
 #include <iostream>
 #include <initializer_list>
+#include <cmath>
 #include "Oscillateur.h"
 #include "Vecteur.h"
 #include "constantes.h"
@@ -76,17 +77,26 @@ void Oscillateur::set_Q(const Vecteur& q){
     Q=q;}
 }
 
+// permet de modifier une vitesse de l'Oscillateur
+void Oscillateur::set_Q(unsigned int n, double newValeur){
+  try{Q.set_coord(n,newValeur);}
+  catch(Erreur err){
+    err.fct+=" appelée par Oscillateur::set_Q(unsigned int, double)";
+    throw err;
+  }
+}
+
 
 //###########################  autres opérations  ############################//
 // fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur //
 Vecteur Oscillateur::f(const double& t) const{
-  Vecteur retour(P.taille());
+  Vecteur retour({-P.get_coord(1)-0.1*Q.get_coord(1)});
   return retour;
 }
 
 // permet l'affichage d'un oscillateur de façon standardisée //
 ostream& Oscillateur::affiche(ostream& sortie)const{
-  sortie << "# Oscillateur" << endl;
+  sortie << "# Oscillateur :" << endl;
   sortie << P << " # parametre" << endl;
   sortie << Q << " # vitesse" << endl;
   return sortie;
