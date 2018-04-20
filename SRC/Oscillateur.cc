@@ -146,8 +146,7 @@ Pendule::Pendule(const std::initializer_list<double>& liP
 
 //fonction d'évolution
 Vecteur Pendule::f(const double& t) const{
-    Vecteur retour(1);
-    retour.set_coord(1,(-(g.get_coord(3)/L)*sin(P.get_coord(1))-(frott*Q.get_coord(1)/m*L*L)));
+    Vecteur retour({(-(g.get_coord(3)/L)*sin(P.get_coord(1))-(frott*Q.get_coord(1)/m*L*L))});
     return retour;
 }
 //retourne position d'un pendule
@@ -170,8 +169,7 @@ Ressort::Ressort(const std::initializer_list<double>& liP
                     ,k(raideur), m(masse), frott(frottement){}
 //fonction d'évolution
 Vecteur Ressort::f(const double& t) const{
-    Vecteur retour(1);
-    retour.set_coord(1,(-(k/m)*P.get_coord(1)-(frott/m)*Q.get_coord(1)+g*a));
+    Vecteur retour({(-(k/m)*P.get_coord(1)-(frott/m)*Q.get_coord(1)+g*a)});
     return retour;
 }
 //retourne la position d'un ressort

@@ -1,4 +1,8 @@
 #pragma once
-#include "Vecteur.h"
+#ifndef PRJ_CONSTANTS_H
+#define PRJ_CONSTANTS_H
 
-extern const Vecteur g;
+const Vecteur g(0.0, 0.0, -9.81);
+
+
+#endif

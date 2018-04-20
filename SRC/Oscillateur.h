@@ -1,7 +1,6 @@
 #pragma once
 #include <initializer_list>
 #include "Vecteur.h"
-#include "constantes.h"
 
 class Oscillateur{
   public:
@@ -25,7 +24,7 @@ class Oscillateur{
 
     //autres opérations
     Vecteur f(const double& t=0) const; // fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur
-    std::ostream& affiche(std::ostream& sortie=std::cout) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
+    std::ostream& affiche(std::ostream& sortie) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
     Vecteur position()const;
 
   protected:

@@ -8,7 +8,7 @@ int main(){
   try{
 
   Oscillateur o;
-  o.affiche();
+  o.affiche(cout);
   //test des get et set
   cout << endl;
   Oscillateur o1;
