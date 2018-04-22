@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Erreur.h"
 #include "Vecteur.h"
 using namespace std;
 
@@ -13,7 +14,8 @@ int main(){
 	cout << endl << "Modification de la 2eme coordonnee : " << endl;
 	v1.set_coord(2,4.0); v1.affiche(cout);
 	cout << endl << "Modification de la 4eme coordonnee : " << endl;
-	v1.set_coord(3,20.0); v1.affiche(cout);
+	v1.set_coord(3,19.0); v1.affiche(cout);
+	(~v1).affiche(cout);
 	// Essai de la methode taille
 	cout << endl << "Taille du 1er vecteur : " << v1.taille() << " " <<  endl;
 	//Essai de la fonction compare
@@ -28,7 +30,7 @@ int main(){
 	v1^v2;
 
 	Vecteur v3(4); v3.affiche(cout); // test du constructeur n-D initilisant avec des zeros
-	v1^v3;
+	v3.get_coord(5);
 	Vecteur v4(2.0,0,-3.23); v4.affiche(cout); //test du constructeur 3D
 	Vecteur v5({2.0,0,-3.24,6,7}); v5.affiche(cout); //test du constructeur par liste
 	Vecteur v6(v5); v6.affiche(cout); //test du constructeur de copie par defaut
@@ -51,12 +53,7 @@ int main(){
 	//cout << v10.to_str() << endl;
 }
 	catch(Erreur err){
-		cerr << endl << endl << "### ERREUR FATALE ###" << endl;
-		cerr << "Type d'erreur : " << err.type << endl;
-		cerr << "Dans fichier  : testVecteur.cc" << endl;
-		cerr << "Dans fonction : " << err.fct << endl;
-		cerr << "Description   : " << err.description << endl;
-		cerr << "### FIN DU PROGRAMME ###" << endl << endl;
+		err.affiche("testVecteur.cc");
 	}
 
 	return 0;

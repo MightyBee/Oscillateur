@@ -5,13 +5,10 @@
 class Oscillateur{
   public:
     //constructeurs
-    explicit Oscillateur(const unsigned int& n=3); // construit un Oscillateur à n degrés de liberté, avec tous les parametres à zéro
-    explicit Oscillateur(const std::initializer_list<double>& liP, // construit un Oscillateur à 3 degrés de libert
-                         const std::initializer_list<double>& liQ);
     explicit Oscillateur(const std::initializer_list<double>& liP, //construit un Oscillateur avec son origine et son axe
                          const std::initializer_list<double>& liQ,
-                         const std::initializer_list<double>& liO,
-                         const std::initializer_list<double>& lia);
+                         const std::initializer_list<double>& lia={1,0,0},
+                         const std::initializer_list<double>& liO={0,0,0});
     //accesseurs
     Vecteur get_P() const; // retourne le vecteur des paramètres de l'oscillateur
     Vecteur get_Q() const; // retourne le vecteur des "vitesses" de l'oscillateur
@@ -23,16 +20,16 @@ class Oscillateur{
     void set_Q(unsigned int n, double newValeur); // permet de modifier une des "vitesses"
 
     //autres opérations
-    Vecteur f(const double& t=0) const; // fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur
+    virtual Vecteur f(const double& t=0) const = 0; // fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur
+    virtual Vecteur position() const = 0;
     std::ostream& affiche(std::ostream& sortie) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
-    Vecteur position()const;
 
   protected:
     //attributs
     Vecteur P; // vecteur contenant les paramètres de l'oscillateur
     Vecteur Q; // vecteur contenenat les dérivées des paramètres
-    Vecteur O; //vecteur représentant la position de référence (origine)
     Vecteur a; //vecteur représentant la direction principale (axe)
+    Vecteur O; //vecteur représentant la position de référence (origine)
 };
 
 std::ostream& operator<<(std::ostream& sortie, const Oscillateur& osc); // permet l'affichage standard : sortie << oscillateur;
@@ -40,14 +37,14 @@ std::ostream& operator<<(std::ostream& sortie, const Oscillateur& osc); // perme
 class Pendule :public Oscillateur{
 public:
   //constructeur
-  explicit Pendule(const std::initializer_list<double>& liP
-                  ,const std::initializer_list<double>& liQ
-                  ,const std::initializer_list<double>& liO
-                  ,const std::initializer_list<double>& lia
-                  ,double longueur, double masse, double frottement);
+  explicit Pendule(const std::initializer_list<double>& liP={0},
+                   const std::initializer_list<double>& liQ={0},
+                   const std::initializer_list<double>& lia={1,0,0},
+                   const std::initializer_list<double>& liO={0,0,0},
+                   double longueur=1, double masse=1, double frottement=0);
   //autres opérations
-  Vecteur f(const double& t) const;
-  Vecteur position()const;
+  virtual Vecteur f(const double& t) const override;
+  virtual Vecteur position() const override;
 
 private:
   double L;
@@ -58,14 +55,14 @@ private:
 class Ressort :public Oscillateur{
 public:
   //constructeur
-  explicit Ressort(const std::initializer_list<double>& liP
-                  ,const std::initializer_list<double>& liQ
-                  ,const std::initializer_list<double>& liO
-                  ,const std::initializer_list<double>& lia
-                  ,double raideur,double masse, double frottement);
+  explicit Ressort(const std::initializer_list<double>& liP={0},
+                   const std::initializer_list<double>& liQ={0},
+                   const std::initializer_list<double>& lia={1,0,0},
+                   const std::initializer_list<double>& liO={0,0,0},
+                   double raideur=1, double masse=1, double frottement=0);
   //autre fonctions
-  Vecteur f(const double& t) const;
-  Vecteur position()const;
+  virtual Vecteur f(const double& t) const override;
+  virtual Vecteur position() const override;
 
 private:
   double k;

@@ -5,12 +5,14 @@
 using namespace std;
 
 int main(){
-  Oscillateur osc({0},{1});
-  Integrateur i1(osc,0.01,0);
-  IntegrateurEulerCromer ec(i1);
-  for(int i(1);i<=100000;i++){
+  Pendule p({M_PI/3});
+  Ressort r({1});
+  double dt=0.01, t=0;
+  IntegrateurEulerCromer ec(&r,dt,t);
+  cout << ec << p.position() << endl;
+  for(int i(1);i<=10000;i++){
     ec.evolue();
-    cout << ec << endl;
+    cout << r.position().get_coord(1) << " " << dt*i+t << " # parametre" << endl;
   }
 
   return 0;

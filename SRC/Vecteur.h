@@ -1,16 +1,10 @@
 #pragma once
+#include "Erreur.h"
 #include <vector>
 #include <string>
 #include <cmath>
 #include <initializer_list>
 
-
-
-struct Erreur{ // definit le type Erreur que l'on lance s'il y a ... une erreur
-	std::string type;
-	std::string fct;
-	std::string description;
-};
 
 
 
@@ -31,6 +25,7 @@ class Vecteur {
 		Vecteur& operator+=(const Vecteur& v2); // additionne un vecteur à l'instance courante
 		Vecteur& operator-=(const Vecteur& v2); // soustrait un vecteur à l'instance courante
 		Vecteur& operator*=(const double& lambda); // multiplie l'instance courante par un scalaire (double)
+		Vecteur& operator/=(const double& lambda); // divise l'instance courante par un scalaire (double)
 
 
 		//accesseurs
@@ -59,3 +54,5 @@ const Vecteur operator-(Vecteur v1, const Vecteur& v2); // différence de deux v
 const Vecteur operator-(Vecteur v); // opposé d'un vecteur
 const Vecteur operator*(const double& lambda, Vecteur v); // multiplication d'un vecteur par un scalaire, cas scal*vect
 const Vecteur operator*(const Vecteur& v, const double& lambda); // multiplication d'un vecteur par un scalaire, cas vect*scal
+const Vecteur operator/(Vecteur v, double lambda); // division d'un vecteur par un scalaire
+const Vecteur operator~(Vecteur v); // retourne le vecteur unitaire : v/||v||

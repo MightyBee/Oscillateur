@@ -3,6 +3,7 @@
 #include <string>
 #include <cmath>
 #include <initializer_list>
+#include "Erreur.h"
 #include "Vecteur.h"
 using namespace std;
 
@@ -36,6 +37,7 @@ bool Vecteur::operator==(const Vecteur& v2) const{
 		return true;
 	}
 }
+
 bool Vecteur::operator!=(const Vecteur& v2) const{
 	return not operator==(v2);
 }
@@ -47,36 +49,50 @@ Vecteur Vecteur::operator^(const Vecteur& v2) const{
                  	(coord[2]*v2.coord[0])-(coord[0]*v2.coord[2]),
                  	(coord[0]*v2.coord[1])-(coord[1]*v2.coord[0]));
 	} else {
-		Erreur err;
-		err.type="dimension";
-		err.fct="Vecteur::operator^(const Vecteur&), i.e. produit vectoriel";
-		err.description="Les dimensions des vecteurs ("+to_string(coord.size())+" et "+to_string(v2.coord.size());
-		err.description+=") ne correspondent pas à celles attendues (3 et 3).";
+		Erreur err("dimension", "Vecteur::operator^(const Vecteur&), i.e. produit vectoriel",
+							 "Les dimensions des vecteurs ("+to_string(coord.size())+" et "+to_string(v2.coord.size())+") ne correspondent pas à celles attendues (3 et 3).");
 		throw err;
 	}
 }
 
 // retourne produit scalaire du vecteur courant avec un autre vecteur //
 double Vecteur::operator*(const Vecteur& v2) const{
-	double retour(0.0);
-	for(size_t i(0);i<coord.size();i++){
-		retour+=coord[i]*v2.coord[i];
+	if(coord.size()==v2.coord.size()){
+		double retour(0.0);
+		for(size_t i(0);i<coord.size();i++){
+			retour+=coord[i]*v2.coord[i];
+		}
+		return retour;
+	} else {
+		Erreur err("dimension", "Vecteur::operator*(const Vecteur&)",
+							 "Produit scalaire de deux vecteurs de dimension différente ("+to_string(coord.size())+" et "+to_string(v2.coord.size())+").");
+		throw err;
 	}
-	return retour;
 }
 
 // addition d'un vecteur au vecteur courant //
 Vecteur& Vecteur::operator+=(const Vecteur& v2){
-	for(size_t i(0);i<coord.size();i++){
-		coord[i]+=v2.coord[i];
+	if(coord.size()==v2.coord.size()){
+		for(size_t i(0);i<coord.size();i++){
+			coord[i]+=v2.coord[i];
+		}
+		return *this;
+	} else {
+		Erreur err("dimension", "Vecteur::operator+=(const Vecteur&)",
+							 "Addition/soustraction de deux vecteurs de dimension différente ("+to_string(coord.size())+" et "+to_string(v2.coord.size())+").");
+		throw err;
 	}
-	return *this;
 }
 
 // soustraction d'un vecteur au vecteur courant //
 Vecteur& Vecteur::operator-=(const Vecteur& v2){
-	operator+=(-v2);
-	return *this;
+	try{
+		operator+=(-v2);
+		return *this;
+	}catch(Erreur err){
+		err.set_fct("Vecteur::operator-=(const Vecteur&)");
+		throw err;
+	}
 }
 
 // multiplication du vecteur courant par un scalaire //
@@ -85,11 +101,28 @@ Vecteur& Vecteur::operator*=(const double& lambda){
 	return *this;
 }
 
+// division du vecteur courant par un scalaire //
+Vecteur& Vecteur::operator/=(const double& lambda){
+	if(lambda!=0){
+		operator*=(1.0/lambda);
+		return *this;
+	} else {
+		Erreur err("division par 0", "Vecteur::operator/=(const double&)", "Division d'un vecteur par zéro.");
+		throw err;
+	}
+}
+
 
 //##############################  accesseurs  ################################//
 // accès à un paramètre
 double Vecteur::get_coord(unsigned int n) const{                 //TODO excption
-	return coord[n-1];
+	if(n<=coord.size() and n>0){
+		return coord[n-1];
+	} else {
+		Erreur err("dimension", "Vecteur::get_cord(unsigned int)",
+							 "L'indice de position fourni en argument ("+to_string(n)+") n'est pas valable (attendu : entier entre 1 et "+to_string(coord.size())+"=dim(Vecteur)).");
+		throw err;
+	}
 }
 
 // retourne la dimension du vecteur //
@@ -106,15 +139,14 @@ void Vecteur::augmente(double newCoord){
 
 // modifie la n-ieme coordonnee du vecteur //
 void Vecteur::set_coord(unsigned int n, double newValeur){
-	if(n>coord.size()){              //erreur : position trop grande par rapport a la dim du vecteur
-		Erreur err;
-		err.type="dimension";
-		err.fct="Vecteur::set_cord(unsigned int, double)";
-		err.description="L'indice de position fourni en argument ("+to_string(n)+") ";
-		err.description+="est plus grande que la dimension du vecteur ("+to_string(coord.size())+").";
+	if(n<=coord.size() and n>0){ //la position joue avec la dimension du vecteur
+		coord[n-1]=newValeur;
+	}
+	else{   //erreur : position trop grande par rapport a la dim du vecteur
+		Erreur err("dimension", "Vecteur::set_cord(unsigned int, double)",
+							 "L'indice de position fourni en argument ("+to_string(n)+") n'est pas valable (attendu : entier entre 1 et "+to_string(coord.size())+"=dim(Vecteur)).");
 		throw err;
 	}
-	else{coord[n-1]=newValeur;}      //la position joue avec la dimension du vecteur
 }
 
 
@@ -136,7 +168,7 @@ double Vecteur::norme() const{
 
 // retourne la norme au carré du vecteur courant : c'est <v,v> //
 double Vecteur::norme2() const{
-	return (*this)*(*this);
+	return (*this)*(*this); // on utilise la surcharge de l'operateur * (produit sclaire)
 }
 
 
@@ -154,14 +186,24 @@ ostream& operator<<(ostream& sortie, const Vecteur& v){
 
 // somme de deux vecteurs //
 const Vecteur operator+(Vecteur v1, const Vecteur& v2){
-	v1+=v2;
-	return v1;
+	try{
+		v1+=v2;
+		return v1;
+	}catch(Erreur err){
+		err.set_fct("operator+(Vecteur, const Vecteur&)");
+		throw err;
+	}
 }
 
 // différence de deux vecteurs //
 const Vecteur operator-(Vecteur v1, const Vecteur& v2){
-	v1-=v2;
-	return v1;
+	try{
+		v1-=v2;
+		return v1;
+	}catch(Erreur err){
+		err.set_fct("operator-(Vecteur, const Vecteur&)");
+		throw err;
+	}
 }
 
 // opposé d'un vecteur //
@@ -179,4 +221,26 @@ const Vecteur operator*(const double& lambda, Vecteur v){
 // multiplication d'un vecteur par un scalaire, cas vect*scal //
 const Vecteur operator*(const Vecteur& v, const double& lambda){
 	return lambda*v;
+}
+
+// division d'un vecteur par un scalaire //
+const Vecteur operator/(Vecteur v, double lambda){
+	try{
+		v/=lambda;
+		return v;
+	}catch(Erreur err){
+		err.set_fct("operator/(Vecteur, double)");
+		throw err;
+	}
+}
+
+// retourne le vecteur unitaire : v/||v||
+const Vecteur operator~(Vecteur v){
+	try{
+		return v/v.norme();
+	}catch(Erreur err){
+		err.set_fct("operator~(Vecteur), i.e. vecteur unitaire");
+		err.set_dscrpt("Le vecteur nul n'a pas de vecteur unitaire correspondant.");
+		throw err;
+	}
 }
