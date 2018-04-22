@@ -12,34 +12,39 @@ CXXFLAGS += -g #                    # pour debugger
 # LDFLAGS  += -pg #                 # pour profiler
 # CXXFLAGS += -O2 #                 # pour optimiser la vitesse
 
+LIB=LIB
+SRC=Oscillateur/SRC
+
 all: testVecteur testOscillateur testIntegrateur
 
-LIB/constantes.o: Oscillateur/SRC/constantes.cc Oscillateur/SRC/constantes.h Oscillateur/SRC/Vecteur.h
+$(LIB)/Erreur.o: $(SRC)/Erreur.cc $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-LIB/Vecteur.o: Oscillateur/SRC/Vecteur.cc Oscillateur/SRC/Vecteur.h
+$(LIB)/Vecteur.o: $(SRC)/Vecteur.cc $(SRC)/Vecteur.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-LIB/testVecteur.o: Oscillateur/SRC/testVecteur.cc Oscillateur/SRC/Vecteur.h
+$(LIB)/testVecteur.o: $(SRC)/testVecteur.cc $(SRC)/Vecteur.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-LIB/Oscillateur.o: Oscillateur/SRC/Oscillateur.cc Oscillateur/SRC/Oscillateur.h Oscillateur/SRC/Vecteur.h Oscillateur/SRC/constantes.h
+$(LIB)/Oscillateur.o: $(SRC)/Oscillateur.cc $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/constantes.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-LIB/testOscillateur.o: Oscillateur/SRC/testOscillateur.cc Oscillateur/SRC/Oscillateur.h Oscillateur/SRC/Vecteur.h Oscillateur/SRC/constantes.h
+$(LIB)/testOscillateur.o: $(SRC)/testOscillateur.cc $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/constantes.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-LIB/Integrateur.o : Oscillateur/SRC/Integrateur.cc Oscillateur/SRC/Integrateur.h Oscillateur/SRC/Oscillateur.h Oscillateur/SRC/Vecteur.h Oscillateur/SRC/constantes.h
+$(LIB)/Integrateur.o : $(SRC)/Integrateur.cc $(SRC)/Integrateur.h $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-LIB/testIntegrateur.o: Oscillateur/SRC/testIntegrateur.cc Oscillateur/SRC/Integrateur.h Oscillateur/SRC/Oscillateur.h Oscillateur/SRC/Vecteur.h Oscillateur/SRC/constantes.h
+$(LIB)/testIntegrateur.o : $(SRC)/testIntegrateur.cc $(SRC)/Integrateur.h $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/constantes.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-testVecteur: LIB/testVecteur.o LIB/Vecteur.o
-	$(CC) $(CXXFLAGS) LIB/testVecteur.o LIB/Vecteur.o -o testVecteur
 
-testOscillateur: LIB/testOscillateur.o LIB/Oscillateur.o LIB/Vecteur.o LIB/constantes.o
-	$(CC) $(CXXFLAGS) LIB/testOscillateur.o LIB/Oscillateur.o LIB/Vecteur.o -o testOscillateur LIB/constantes.o
 
-testIntegrateur: LIB/testIntegrateur.o LIB/Integrateur.o LIB/Oscillateur.o LIB/Vecteur.o LIB/constantes.o
-	$(CC) $(CXXFLAGS) LIB/testIntegrateur.o LIB/Integrateur.o LIB/Oscillateur.o LIB/Vecteur.o -o testIntegrateur LIB/constantes.o
+testVecteur: $(LIB)/testVecteur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o
+	$(CC) $(CXXFLAGS) $(LIB)/testVecteur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o -o testVecteur
+
+testOscillateur: $(LIB)/testOscillateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o
+	$(CC) $(CXXFLAGS) $(LIB)/testOscillateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o -o testOscillateur
+
+testIntegrateur: $(LIB)/testIntegrateur.o $(LIB)/Integrateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o
+	$(CC) $(CXXFLAGS) $(LIB)/testIntegrateur.o $(LIB)/Integrateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o -o testIntegrateur
