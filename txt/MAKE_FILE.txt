@@ -32,10 +32,10 @@ $(LIB)/Oscillateur.o: $(SRC)/Oscillateur.cc $(SRC)/Oscillateur.h $(SRC)/Vecteur.
 $(LIB)/testOscillateur.o: $(SRC)/testOscillateur.cc $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/constantes.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-$(LIB)/testPendule.o: $(SRC)/testPendule.cc $(SRC)/Vecteur.h $(SRC)/Oscillateur.h $(SRC)/Integrateur.h
+$(LIB)/testPendule.o: $(SRC)/testPendule.cc $(SRC)/Vecteur.h $(SRC)/Oscillateur.h $(SRC)/Integrateur.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-LIB/testRessort.o: $(SRC)/testRessort.cc $(SRC)/Vecteur.h $(SRC)/Oscillateur.h $(SRC)/Integrateur.h
+$(LIB)/testRessort.o: $(SRC)/testRessort.cc $(SRC)/Vecteur.h $(SRC)/Oscillateur.h $(SRC)/Integrateur.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
 $(LIB)/Integrateur.o : $(SRC)/Integrateur.cc $(SRC)/Integrateur.h $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/Erreur.h
@@ -55,8 +55,8 @@ testOscillateur: $(LIB)/testOscillateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o 
 testIntegrateur: $(LIB)/testIntegrateur.o $(LIB)/Integrateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o
 	$(CC) $(CXXFLAGS) $(LIB)/testIntegrateur.o $(LIB)/Integrateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o -o testIntegrateur
 
-testPendule: $(LIB)/testPendule.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o
-	$(CC) $(CXXFLAGS) $(LIB)/testPendule.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o -o testPendule
+testPendule: $(LIB)/testPendule.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o
+	$(CC) $(CXXFLAGS) $(LIB)/testPendule.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o -o testPendule
 
-testRessort: $(LIB)/testRessort.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o
-	$(CC) $(CXXFLAGS) $(LIB)/testRessort.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o -o testRessort
+testRessort: $(LIB)/testRessort.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o
+	$(CC) $(CXXFLAGS) $(LIB)/testRessort.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o -o testRessort
