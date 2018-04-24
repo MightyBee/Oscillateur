@@ -12,8 +12,8 @@ using namespace std;
 
 //#############################  constructeurs  ##############################//
 // construit un intégrateur en initilisant tous ses attributs
-Integrateur::Integrateur(Oscillateur* const& osc, const double& pdt, const double t)
-                        : osc(osc), pdt(pdt), t_abs(t) {}
+Integrateur::Integrateur(Oscillateur const& osc, const double& pdt, const double t)
+                        : osc(osc.copie()), pdt(pdt), t_abs(t) {}
 
 
 //##############################  accesseurs  ################################//
@@ -60,7 +60,7 @@ ostream& operator<<(ostream& sortie, const Integrateur& integrat){
 
 
 // construit un intégrateur Euler-Cromer en initilisant tous ses attributs
-IntegrateurEulerCromer::IntegrateurEulerCromer(Oscillateur* const& osc, const double& pdt, const double t)
+IntegrateurEulerCromer::IntegrateurEulerCromer(Oscillateur const& osc, const double& pdt, const double t)
                                               : Integrateur(osc,pdt,t) {}
 
 // spécialisation de la méthode "evolue()" de la super-classe, avance d'un pas de temps avec la méthode d'intégration d'Euler-Cromer

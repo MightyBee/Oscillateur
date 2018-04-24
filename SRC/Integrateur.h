@@ -7,7 +7,8 @@ class Integrateur{
   public:
     // constructeur(s)
     // note : on doit toujours initiliser un integrateur en lui associant un oscillateur, pas de constructeur par défaut
-    explicit Integrateur(Oscillateur* const& osc, const double& pdt=0.01, const double t=0);
+    explicit Integrateur(Oscillateur const& osc, const double& pdt=0.01, const double t=0);
+    virtual ~Integrateur(){}
 
     // accesseurs
     double get_t() const; // retourne le temps absolu de l'intégrateur
@@ -30,7 +31,8 @@ std::ostream& operator<<(std::ostream& sortie, const Integrateur& integrat); // 
 class IntegrateurEulerCromer : public Integrateur{
   public:
     // constructeur (note: pas de constructeurs par défaut comme pour la super-classe Integrateur)
-    explicit IntegrateurEulerCromer(Oscillateur* const& osc, const double& pdt=0.01, const double t=0); // permet d'initialiser tous les attributs d'un intégrateur Euler-Cromer
+    explicit IntegrateurEulerCromer(Oscillateur const& osc, const double& pdt=0.01, const double t=0); // permet d'initialiser tous les attributs d'un intégrateur Euler-Cromer
+    virtual ~IntegrateurEulerCromer(){}
 
     // autres méthodes
     virtual void evolue() override; // spécialisation de la méthode "evolue()" de la super-classe, avance d'un pas de temps avec la méthode d'intégration d'Euler-Cromer
