@@ -115,6 +115,15 @@ Pendule::Pendule(const std::initializer_list<double>& liP,
                  : Oscillateur(liP, liQ, lia, liO), L(longueur), m(masse), frott(frottement) //TODO ERREUR : dimensions, a*g=0
                  {} //TODO question : comment catcher une erreur lancée par le constructeur de Oscillateur ?
 
+unique_ptr<Pendule> Pendule::clone() const{
+  return unique_ptr<Pendule>(new Pendule(*this));
+}
+
+unique_ptr<Oscillateur> Pendule::copie() const{
+  return clone();
+}
+
+
 //fonction d'évolution
 Vecteur Pendule::f(const double& t) const{
     Vecteur retour({-(g.norme()/L)*sin(P.get_coord(1))-(frott*Q.get_coord(1)/(m*L*L))});
@@ -139,6 +148,15 @@ Ressort::Ressort(const std::initializer_list<double>& liP,
                  double raideur,double masse, double frottement)
                     :Oscillateur(liP,liQ,lia,liO)//TODO ERREUR
                     ,k(raideur), m(masse), frott(frottement){}
+
+unique_ptr<Ressort> Ressort::clone() const{
+  return unique_ptr<Ressort>(new Ressort(*this));
+}
+
+unique_ptr<Oscillateur> Ressort::copie() const{
+  return clone();
+}
+
 //fonction d'évolution
 Vecteur Ressort::f(const double& t) const{
     Vecteur retour({(-(k/m)*P.get_coord(1)-(frott/m)*Q.get_coord(1)+g*a)});

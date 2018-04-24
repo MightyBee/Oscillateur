@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include "Integrateur.h"
 #include "Oscillateur.h"
 #include "Vecteur.h"
@@ -23,8 +24,8 @@ double Integrateur::get_t() const{
 }
 
 // retourne l'oscillateur associé à l'intégrateur
-Oscillateur* Integrateur::get_osc() const{   //TODO pas une bonne solution mais ne peut pas retourner d'oscillateur (classe abstraite)
-  return osc;
+unique_ptr<Oscillateur> Integrateur::get_osc() const{   //TODO pas une bonne solution mais ne peut pas retourner d'oscillateur (classe abstraite)
+  return osc->copie();
 }
 
 

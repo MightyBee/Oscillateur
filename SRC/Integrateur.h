@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "Oscillateur.h"
 #include "Vecteur.h"
 
@@ -12,7 +13,7 @@ class Integrateur{
 
     // accesseurs
     double get_t() const; // retourne le temps absolu de l'intégrateur
-    Oscillateur* get_osc() const; // retourne l'oscillateur associé à l'intégrateur
+    std::unique_ptr<Oscillateur> get_osc() const; // retourne l'oscillateur associé à l'intégrateur
 
     // autres méthodes
     virtual void evolue() = 0; // méthode qui fait évoluer l'intégrateur d'un pas de temps
@@ -20,7 +21,7 @@ class Integrateur{
 
   protected:
     //attributs
-    Oscillateur* osc; // oscillateur auquel est associé l'intégrateur
+    std::unique_ptr<Oscillateur> osc; // oscillateur auquel est associé l'intégrateur
     double pdt; // pas de temps d'intégration
     double t_abs; // temps absolu, référence
 };

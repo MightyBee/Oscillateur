@@ -11,7 +11,7 @@ class Oscillateur{
                          const std::initializer_list<double>& lia={1,0,0},
                          const std::initializer_list<double>& liO={0,0,0});
     virtual ~Oscillateur(){}
-    virtual unique_ptr<Oscillateur> copie() = 0;
+    virtual std::unique_ptr<Oscillateur> copie() const = 0;
     //accesseurs
     Vecteur get_P() const; // retourne le vecteur des paramètres de l'oscillateur
     Vecteur get_Q() const; // retourne le vecteur des "vitesses" de l'oscillateur
@@ -46,12 +46,8 @@ public:
                    const std::initializer_list<double>& liO={0,0,0},
                    double longueur=1, double masse=1, double frottement=0);
   virtual ~Pendule(){}
-  unique_ptr<Pendule> Pendule::clone() const{
-    return unique_ptr<Pendule>(new Pendule(*this)); //TODO a mettre dans .cc
-  }
-  virtual unique_ptr<Pendule> Pendule::copie() const override{
-    return clone();
-  }
+  std::unique_ptr<Pendule> clone() const;
+  virtual std::unique_ptr<Oscillateur> copie() const override;
 
   //autres opérations
   virtual Vecteur f(const double& t) const override;
@@ -72,12 +68,8 @@ public:
                    const std::initializer_list<double>& liO={0,0,0},
                    double raideur=1, double masse=1, double frottement=0);
   virtual ~Ressort(){}
-  unique_ptr<Ressort> Ressort::clone() const{
-    return unique_ptr<Ressort>(new Ressort(*this));
-  }
-  virtual unique_ptr< Ressort> Ressort::copie() const override{
-    return clone();
-  }
+  std::unique_ptr<Ressort> clone() const;
+  virtual std::unique_ptr<Oscillateur> copie() const override;
 
   //autre fonctions
   virtual Vecteur f(const double& t) const override;

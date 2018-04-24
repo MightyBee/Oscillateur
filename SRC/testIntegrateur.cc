@@ -8,7 +8,7 @@ int main(){
   Pendule p({M_PI/3});
   Ressort r({1});
   double dt=0.01, t=0;
-  IntegrateurEulerCromer ec(&r,dt,t);
+  IntegrateurEulerCromer ec(r,dt,t);
   cout << ec << p.position() << endl;
   for(int i(1);i<=10000;i++){
     ec.evolue();
