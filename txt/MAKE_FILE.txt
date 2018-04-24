@@ -45,7 +45,6 @@ $(LIB)/testIntegrateur.o : $(SRC)/testIntegrateur.cc $(SRC)/Integrateur.h $(SRC)
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
 
-
 testVecteur: $(LIB)/testVecteur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o
 	$(CC) $(CXXFLAGS) $(LIB)/testVecteur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o -o testVecteur
 
