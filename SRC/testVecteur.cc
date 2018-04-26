@@ -1,5 +1,4 @@
 #include <iostream>
-#include "Erreur.h"
 #include "Vecteur.h"
 using namespace std;
 

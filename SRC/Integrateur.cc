@@ -1,8 +1,6 @@
 #include <iostream>
 #include <memory>
 #include "Integrateur.h"
-#include "Oscillateur.h"
-#include "Vecteur.h"
 using namespace std;
 
 /*##############################################################################

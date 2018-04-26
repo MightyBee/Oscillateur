@@ -3,7 +3,6 @@
 #include <string>
 #include <cmath>
 #include <initializer_list>
-#include "Erreur.h"
 #include "Vecteur.h"
 using namespace std;
 

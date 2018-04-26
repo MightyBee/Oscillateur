@@ -2,11 +2,13 @@
 #include <initializer_list>
 #include <memory>
 #include "Vecteur.h"
+#include "Dessinable.h"
 
-class Oscillateur{
+class Oscillateur : public Dessinable {
   public:
     //constructeurs
-    explicit Oscillateur(const std::initializer_list<double>& liP, //construit un Oscillateur avec son origine et son axe
+    explicit Oscillateur(SupportADessin* support,
+                         const std::initializer_list<double>& liP, //construit un Oscillateur avec son origine et son axe
                          const std::initializer_list<double>& liQ,
                          const std::initializer_list<double>& lia={1,0,0},
                          const std::initializer_list<double>& liO={0,0,0});
@@ -40,7 +42,8 @@ std::ostream& operator<<(std::ostream& sortie, const Oscillateur& osc); // perme
 class Pendule :public Oscillateur{
 public:
   //constructeur
-  explicit Pendule(const std::initializer_list<double>& liP={0},
+  explicit Pendule(SupportADessin* support,
+                   const std::initializer_list<double>& liP={0},
                    const std::initializer_list<double>& liQ={0},
                    const std::initializer_list<double>& lia={1,0,0},
                    const std::initializer_list<double>& liO={0,0,0},
@@ -48,7 +51,7 @@ public:
   virtual ~Pendule(){}
   std::unique_ptr<Pendule> clone() const;
   virtual std::unique_ptr<Oscillateur> copie() const override;
-
+  virtual void dessine() override;
   //autres opérations
   virtual Vecteur f(const double& t) const override;
   virtual Vecteur position() const override;
@@ -62,7 +65,8 @@ private:
 class Ressort :public Oscillateur{
 public:
   //constructeur
-  explicit Ressort(const std::initializer_list<double>& liP={0},
+  explicit Ressort(SupportADessin* support,
+                   const std::initializer_list<double>& liP={0},
                    const std::initializer_list<double>& liQ={0},
                    const std::initializer_list<double>& lia={1,0,0},
                    const std::initializer_list<double>& liO={0,0,0},
@@ -70,7 +74,7 @@ public:
   virtual ~Ressort(){}
   std::unique_ptr<Ressort> clone() const;
   virtual std::unique_ptr<Oscillateur> copie() const override;
-
+  virtual void dessine() override;
   //autre fonctions
   virtual Vecteur f(const double& t) const override;
   virtual Vecteur position() const override;

@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include "Oscillateur.h"
-#include "Vecteur.h"
 
 // super-classe Integrateur, abstraite (pas de méthodes d'intégration numérique spécifiées)
 class Integrateur{

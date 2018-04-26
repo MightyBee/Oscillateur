@@ -1,8 +1,7 @@
 #include <iostream>
-#include "Vecteur.h"
 #include "Oscillateur.h"
+#include "TextViewer.h"
 #include "constantes.h"
-#include "Erreur.h"
 using namespace std;
 
 int main(){
@@ -34,9 +33,10 @@ int main(){
   Oscillateur osc5({1,2},{3,4});
   cout << osc5 << endl;
   */
-
-  Pendule p({M_PI/3,2});
-  p.set_P(0,0);
+  Vecteur v({2,2,3,4});
+  cout << v << endl;
+  TextViewer tv(cout);
+  Pendule p(&tv,{M_PI/3});
   cout << p.position() << endl;
   }catch(Erreur err){
     err.affiche("testOscillateur.cc");
