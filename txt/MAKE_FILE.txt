@@ -26,16 +26,22 @@ $(LIB)/Vecteur.o: $(SRC)/Vecteur.cc $(SRC)/Vecteur.h $(SRC)/Erreur.h
 $(LIB)/testVecteur.o: $(SRC)/testVecteur.cc $(SRC)/Vecteur.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-$(LIB)/Oscillateur.o: $(SRC)/Oscillateur.cc $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/constantes.h $(SRC)/Erreur.h
+$(LIB)/TextViewer.o: $(SRC)/TextViewer.cc $(SRC)/TextViewer.h $(SRC)/SupportADessin.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-$(LIB)/testOscillateur.o: $(SRC)/testOscillateur.cc $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/constantes.h $(SRC)/Erreur.h
+$(LIB)/Dessinable.o: $(SRC)/Dessinable.cc $(SRC)/Dessinable.h $(SRC)/SupportADessin.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-$(LIB)/testPendule.o: $(SRC)/testPendule.cc $(SRC)/Vecteur.h $(SRC)/Oscillateur.h $(SRC)/Integrateur.h $(SRC)/Erreur.h
+$(LIB)/Oscillateur.o: $(SRC)/Oscillateur.cc $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/Dessinable.h $(SRC)/SupportADessin.h $(SRC)/constantes.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
-$(LIB)/testRessort.o: $(SRC)/testRessort.cc $(SRC)/Vecteur.h $(SRC)/Oscillateur.h $(SRC)/Integrateur.h $(SRC)/Erreur.h
+$(LIB)/testOscillateur.o: $(SRC)/testOscillateur.cc $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/Dessinable.h $(SRC)/SupportADessin.h $(SRC)/constantes.h $(SRC)/Erreur.h
+	$(CC) $(CXXFLAGS) -c -o $@ $<
+
+$(LIB)/testPendule.o: $(SRC)/testPendule.cc $(SRC)/Vecteur.h $(SRC)/Oscillateur.h $(SRC)/Integrateur.h $(SRC)/Dessinable.h $(SRC)/SupportADessin.h $(SRC)/Erreur.h
+	$(CC) $(CXXFLAGS) -c -o $@ $<
+
+$(LIB)/testRessort.o: $(SRC)/testRessort.cc $(SRC)/Vecteur.h $(SRC)/Oscillateur.h $(SRC)/Integrateur.h $(SRC)/Dessinable.h $(SRC)/SupportADessin.h $(SRC)/Erreur.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
 $(LIB)/Integrateur.o : $(SRC)/Integrateur.cc $(SRC)/Integrateur.h $(SRC)/Oscillateur.h $(SRC)/Vecteur.h $(SRC)/Erreur.h
@@ -45,17 +51,18 @@ $(LIB)/testIntegrateur.o : $(SRC)/testIntegrateur.cc $(SRC)/Integrateur.h $(SRC)
 	$(CC) $(CXXFLAGS) -c -o $@ $<
 
 
+
 testVecteur: $(LIB)/testVecteur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o
 	$(CC) $(CXXFLAGS) $(LIB)/testVecteur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o -o testVecteur
 
-testOscillateur: $(LIB)/testOscillateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o
-	$(CC) $(CXXFLAGS) $(LIB)/testOscillateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o -o testOscillateur
+testOscillateur: $(LIB)/testOscillateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o $(LIB)/TextViewer.o $(LIB)/Dessinable.o #$(LIB)/SupportADessin.o
+	$(CC) $(CXXFLAGS) $(LIB)/testOscillateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o $(LIB)/TextViewer.o $(LIB)/Dessinable.o -o testOscillateur #$(LIB)/SupportADessin.o
 
-testIntegrateur: $(LIB)/testIntegrateur.o $(LIB)/Integrateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o
-	$(CC) $(CXXFLAGS) $(LIB)/testIntegrateur.o $(LIB)/Integrateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o -o testIntegrateur
+testIntegrateur: $(LIB)/testIntegrateur.o $(LIB)/Integrateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/TextViewer.o $(LIB)/Dessinable.o $(LIB)/Erreur.o
+	$(CC) $(CXXFLAGS) $(LIB)/testIntegrateur.o $(LIB)/Integrateur.o $(LIB)/Oscillateur.o $(LIB)/Vecteur.o $(LIB)/Erreur.o $(LIB)/TextViewer.o $(LIB)/Dessinable.o -o testIntegrateur
 
-testPendule: $(LIB)/testPendule.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o
-	$(CC) $(CXXFLAGS) $(LIB)/testPendule.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o -o testPendule
+testPendule: $(LIB)/testPendule.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o $(LIB)/TextViewer.o $(LIB)/Dessinable.o #$(LIB)/SupportADessin.o
+	$(CC) $(CXXFLAGS) $(LIB)/testPendule.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o $(LIB)/TextViewer.o $(LIB)/Dessinable.o -o testPendule #$(LIB)/SupportADessin.o
 
-testRessort: $(LIB)/testRessort.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o
-	$(CC) $(CXXFLAGS) $(LIB)/testRessort.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o -o testRessort
+testRessort: $(LIB)/testRessort.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o $(LIB)/TextViewer.o $(LIB)/Dessinable.o #$(LIB)/SupportADessin.o
+	$(CC) $(CXXFLAGS) $(LIB)/testRessort.o $(LIB)/Vecteur.o $(LIB)/Oscillateur.o $(LIB)/Integrateur.o $(LIB)/Erreur.o $(LIB)/TextViewer.o $(LIB)/Dessinable.o -o testRessort #$(LIB)/SupportADessin.o
