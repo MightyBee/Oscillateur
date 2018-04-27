@@ -10,10 +10,12 @@ int main(){
     TextViewer TV(cout);
     IntegrateurEulerCromer euler;
     Systeme syst(&TV,euler);
-    Pendule p(&TV,{M_PI/2});
+    Pendule p({M_PI/2});
     syst.add(p);
-    Ressort r(&TV,{0.18}, {0}, {0.8,0,0}, {0,0,0}, 1, 0.25, 0.1);
-    syst.add(r);
+    Ressort r1({0.18}, {0}, {0.8,0,0.2}, {0,0,0}, 1, 0.25, 0.1, &TV);
+    Ressort r2({0.18}, {0}, {0.8,0,0.2}, {0,0,0}, 2, 0.25, 0.1);
+    syst.add(r1);
+    syst.add(r2);
     cout << syst << endl;
     for(int i(1);i<=100;i++){
       syst.evolue();

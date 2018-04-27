@@ -35,8 +35,7 @@ int main(){
   */
   Vecteur v({2,2,3,4});
   cout << v << endl;
-  TextViewer tv(cout);
-  Pendule p(&tv,{M_PI/3});
+  Pendule p({M_PI/3});
   cout << p.position() << endl;
   }catch(Erreur err){
     err.affiche("testOscillateur.cc");

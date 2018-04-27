@@ -13,11 +13,11 @@ using namespace std;
 
 //#############################  constructeurs  ##############################//
 // construit un Oscillateur à partir d'une liste pour les paramètres et une autre pour leurs dérivées //
-Oscillateur::Oscillateur(SupportADessin* support,
-                         const initializer_list<double>& liP,
+Oscillateur::Oscillateur(const initializer_list<double>& liP,
                          const initializer_list<double>& liQ,
                          const initializer_list<double>& lia,
-                         const initializer_list<double>& liO)
+                         const initializer_list<double>& liO,
+                         SupportADessin* support)
                         : Dessinable(support), P(liP), Q(liQ), a(~Vecteur(lia)), O(liO)
                         {if(liP.size()!=liQ.size()){
                           Erreur err("dimension", "Oscillateur::Oscillateur(const initializer_list<double>& x4)",
@@ -105,13 +105,13 @@ ostream& operator<<(ostream& sortie, const Oscillateur& osc){
 ###                                                                          ###
 ##############################################################################*/
 //constructeur
-Pendule::Pendule(SupportADessin* support,
-                 const std::initializer_list<double>& liP,
+Pendule::Pendule(const std::initializer_list<double>& liP,
                  const std::initializer_list<double>& liQ,
                  const std::initializer_list<double>& lia,
                  const std::initializer_list<double>& liO,
-                 double longueur, double masse, double frottement)
-                 : Oscillateur(support,liP, liQ, lia, liO), L(longueur), m(masse), frott(frottement) //TODO ERREUR : dimensions, a*g=0
+                 double longueur, double masse, double frottement,
+                 SupportADessin* support)
+                 : Oscillateur(liP, liQ, lia, liO, support), L(longueur), m(masse), frott(frottement) //TODO ERREUR : dimensions, a*g=0
                  {} //TODO question : comment catcher une erreur lancée par le constructeur de Oscillateur ?
 
 unique_ptr<Pendule> Pendule::clone() const{
@@ -154,13 +154,13 @@ ostream& Pendule::affiche(ostream& sortie) const{
 ###                                                                          ###
 ##############################################################################*/
 //constructeur
-Ressort::Ressort(SupportADessin* support,
-                 const std::initializer_list<double>& liP,
+Ressort::Ressort(const std::initializer_list<double>& liP,
                  const std::initializer_list<double>& liQ,
                  const std::initializer_list<double>& lia,
                  const std::initializer_list<double>& liO,
-                 double raideur,double masse, double frottement)
-                  : Oscillateur(support, liP,liQ,lia,liO)//TODO ERREUR
+                 double raideur,double masse, double frottement,
+                 SupportADessin* support)
+                  : Oscillateur(liP,liQ,lia,liO, support)//TODO ERREUR
                   ,k(raideur), m(masse), frott(frottement){}
 
 unique_ptr<Ressort> Ressort::clone() const{

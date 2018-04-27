@@ -6,12 +6,11 @@ using namespace std;
 
 int main(){
   try{
-    TextViewer tv(cout);
-    Pendule p(&tv,{M_PI/2});
+    Pendule p({M_PI/2});
     IntegrateurEulerCromer euler;
     for(int i(1);i<=100;i++){
       euler.evolue(p,0.1);
-      p.dessine();
+      cout << p << endl;
     }
   }catch(Erreur err){
     err.affiche("testPendule.cc");
