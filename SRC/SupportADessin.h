@@ -2,6 +2,7 @@
 
 class Pendule;
 class Ressort;
+class Systeme;
 
 class SupportADessin
 {
@@ -11,6 +12,6 @@ class SupportADessin
 
   virtual void dessine(Pendule const&) = 0;
   virtual void dessine(Ressort const&) = 0;
-  //virtual void dessine(Systeme const&) = 0;
-  // ... autres choses que vous voudriez dessiner...
+  virtual void dessine(Systeme const&) = 0;
+  
 };

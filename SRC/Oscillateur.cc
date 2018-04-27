@@ -123,7 +123,9 @@ unique_ptr<Oscillateur> Pendule::copie() const{
 }
 
 void Pendule::dessine(){
-  support->dessine(*this);
+  if(support!=nullptr){
+    support->dessine(*this);
+  }
 }
 
 //fonction d'évolution
@@ -170,7 +172,9 @@ unique_ptr<Oscillateur> Ressort::copie() const{
 }
 
 void Ressort::dessine(){
-  support->dessine(*this);
+  if(support!=nullptr){
+    support->dessine(*this);
+  }
 }
 
 //fonction d'évolution

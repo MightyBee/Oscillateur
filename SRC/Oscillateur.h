@@ -7,7 +7,7 @@
 class Oscillateur : public Dessinable {
   public:
     //constructeurs
-    explicit Oscillateur(SupportADessin* support,
+    explicit Oscillateur(SupportADessin* support,                  //TODO mettre en dernier et valeur par defaut nullptr
                          const std::initializer_list<double>& liP, //construit un Oscillateur avec son origine et son axe
                          const std::initializer_list<double>& liQ,
                          const std::initializer_list<double>& lia={1,0,0},
