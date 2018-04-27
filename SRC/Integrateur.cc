@@ -62,6 +62,14 @@ ostream& operator<<(ostream& sortie, const Integrateur& integrat){
 IntegrateurEulerCromer::IntegrateurEulerCromer(Oscillateur const& osc, const double& pdt, const double t)
                                               : Integrateur(osc,pdt,t) {}
 
+unique_ptr<IntegrateurEulerCromer> IntegrateurEulerCromer::clone() const{
+  return unique_ptr<Cercle>(new Cercle(*this));
+}
+
+unique_ptr<Integrateur> IntegrateurEulerCromer::copie() const{
+  return clone();
+}
+
 // spécialisation de la méthode "evolue()" de la super-classe, avance d'un pas de temps avec la méthode d'intégration d'Euler-Cromer
 void IntegrateurEulerCromer::evolue(){
   osc->set_Q(osc->get_Q()+pdt*osc->f());

@@ -27,7 +27,7 @@ class Oscillateur : public Dessinable {
     //autres opérations
     virtual Vecteur f(const double& t=0) const = 0; // fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur
     virtual Vecteur position() const = 0;
-    std::ostream& affiche(std::ostream& sortie) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
+    virtual std::ostream& affiche(std::ostream& sortie) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
 
   protected:
     //attributs
@@ -55,6 +55,7 @@ public:
   //autres opérations
   virtual Vecteur f(const double& t) const override;
   virtual Vecteur position() const override;
+  virtual std::ostream& affiche(std::ostream& sortie) const override; // permet permet d'afficher le vecteur par composants sur un flot de sortie
 
 private:
   double L;
@@ -78,6 +79,7 @@ public:
   //autre fonctions
   virtual Vecteur f(const double& t) const override;
   virtual Vecteur position() const override;
+  virtual std::ostream& affiche(std::ostream& sortie) const override; // permet permet d'afficher le vecteur par composants sur un flot de sortie
 
 private:
   double k;

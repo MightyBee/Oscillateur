@@ -137,6 +137,15 @@ Vecteur Pendule::position() const {
   return retour;
 }
 
+// permet l'affichage d'un oscillateur de façon standardisée //
+ostream& Pendule::affiche(ostream& sortie) const{
+  sortie << "# Pendule :" << endl;
+  sortie << P << " # parametre (angle)" << endl;
+  sortie << Q << " # vitesse angulaire" << endl;
+  sortie << position() << "# position" << endl;
+  return sortie;
+}
+
 /*##############################################################################
 ###                                                                          ###
 ###                    METHODES DE LA CLASSE Ressort                         ###
@@ -172,4 +181,13 @@ Vecteur Ressort::f(const double& t) const{
 //retourne la position d'un ressort
 Vecteur Ressort::position()const{
     return O + P.get_coord(1)*a;
+}
+
+// permet l'affichage d'un oscillateur de façon standardisée //
+ostream& Ressort::affiche(ostream& sortie) const{
+  sortie << "# Ressort :" << endl;
+  sortie << P << " # parametre (distance de l'origine)" << endl;
+  sortie << Q << " # vitesse" << endl;
+  sortie << position() << "# position" << endl;
+  return sortie;
 }

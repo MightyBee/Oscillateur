@@ -13,7 +13,7 @@ class Integrateur{
     // accesseurs
     double get_t() const; // retourne le temps absolu de l'intégrateur
     std::unique_ptr<Oscillateur> get_osc() const; // retourne l'oscillateur associé à l'intégrateur
-
+    virtual std::unique_ptr<Integrateur> copie() const = 0;
     // autres méthodes
     virtual void evolue() = 0; // méthode qui fait évoluer l'intégrateur d'un pas de temps
     std::ostream& affiche(std::ostream& sortie=std::cout) const; // permet permet d'afficher l'integrateur (temps absolu, état de l'oscillateur) sur un flot de sortie
@@ -34,6 +34,11 @@ class IntegrateurEulerCromer : public Integrateur{
     explicit IntegrateurEulerCromer(Oscillateur const& osc, const double& pdt=0.01, const double t=0); // permet d'initialiser tous les attributs d'un intégrateur Euler-Cromer
     virtual ~IntegrateurEulerCromer(){}
 
+    std::unique_ptr<IntegrateurEulerCromer> clone() const;
+//{ return unique_ptr<Cercle>(new Cercle(*this)); }
+
+  virtual std::unique_ptr<Integrateur> copie() const override;
+//{ return clone(); }
     // autres méthodes
     virtual void evolue() override; // spécialisation de la méthode "evolue()" de la super-classe, avance d'un pas de temps avec la méthode d'intégration d'Euler-Cromer
 };
