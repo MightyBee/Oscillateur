@@ -6,24 +6,24 @@
 [V] lire complètement le descriptif général            	020
 [V] s'inscrire en binôme                               	003
 [V] fusionner les deux projets                         	001
-[V] Makefile                                           	030
-[ ] Vecteur finie (pleinement opérationnelle et testée)	???
-[ ] fichier REPONSES                                   	???
-[ ] Oscillateur                                        	???
-[ ] intégrateur d'Euler-Cromer                         	???
-[ ] Pendule                                            	???
-[ ] Ressor                                             	???
-[ ] Systeme                                            	???
-[ ] exerciceP10                                        	???
-[ ] graphisme: cadre général                           	???
-[ ] graphisme: Pendule                                 	???
-[ ] OscillateurCouple                                  	???
-[ ] PenduleDouble                                      	???
-[ ] espace des phases                                  	???
-[ ] integrateur Newmark                                	???
-[ ] fichier CONCEPTION                                 	???
-[ ] fichier README                                     	???
-[ ] fichier NOMS                                       	???
+[V] Makefile                                           	060
+[V] Vecteur finie (pleinement opérationnelle et testée)	240
+[V] fichier REPONSES                                   	180
+[V] Oscillateur                                        	240
+[V] intégrateur d'Euler-Cromer                         	120
+[V] Pendule                                            	060
+[V] Ressor                                             	060
+[V] Systeme                                            	030
+[V] exerciceP10                                        	120
+[V] graphisme: cadre général                           	240
+[V] graphisme: Pendule                                 	240
+[V] OscillateurCouple                                  	120
+[V] PenduleDouble                                      	060
+[V] espace des phases                                  	240
+[V] integrateurs Newmark et Runge-Kutta                 060
+[V] fichier CONCEPTION                                 	030
+[V] fichier README                                     	???
+[V] fichier NOMS                                       	???
 
 
 ======================================================================
@@ -36,62 +36,80 @@ Timothée:
 ======================================================================
 # SUIVI
 
+## Semaine 1 :
+Familiarisation avec le projet
+Lecture du complément mathématique
+
+--------------------------------------------------
 ## Semaine 2 :
 Ebauche de la classe Vecteur.
+testVecteur
 On a pris de l'avance sur les vidéos du MOOC.
-Mise en place du Makefile.
+Mise en place du Makefile et de la modularisation
 Mise en place de Git et Github.
 
 
 --------------------------------------------------
 ## Semaine 3 :
-
+Avancement de la classe vecteur (constructeurs)
+Classe Vecteur3D
 
 
 --------------------------------------------------
 ## Semaine 4 :
-
+Opérateurs de la classe Vecteur + amélioration de
+la classe
+Début de la classe Oscillateur
 
 
 --------------------------------------------------
 ## Semaine 5 :
-
+Intégrateur (Euler-Cromer)
+Classes pendules et ressort
 
 
 --------------------------------------------------
 ## Semaine 6 :
-
+Révision générale du programme (ex: mise en place
+du polymorphisme, creation de la classe erreur)
 
 
 --------------------------------------------------
 ## Semaine 7 :
-
+Début de classes Dessinable et SupportADessin
 
 
 --------------------------------------------------
 ## Semaine 8 :
-
-
+Avancement de Dessinable et SupportADessin
+classe Systeme
+Classe TextViewer
 
 --------------------------------------------------
 ## Semaine 9 :
-
+exerciceP10
+mise à jour général du code
 
 
 --------------------------------------------------
 ## Semaine 10 :
-
+Oscillateurs couplés (torsion, chariot, pendule
+double)
+Intégrateurs Newmark et Runge-Kutta
 
 
 --------------------------------------------------
 ## Semaine 11 :
-
+Oscillateurs couplés suite (PenduleRessort et affichage)
+Espace des phases
 
 
 --------------------------------------------------
 ## Semaine 12 :
-
+Espace des phases
 
 
 --------------------------------------------------
 ## Semaine 13 :
+Mise au propre du code
+Préparation du rendu
