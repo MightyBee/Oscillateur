@@ -2,10 +2,7 @@
 #include <initializer_list>
 #include <cmath>
 #include "Oscillateur.h"
-#include "Vecteur.h"
 #include "constantes.h"
-#include "Erreur.h"
-#include <cmath>
 using namespace std;
 
 /*##############################################################################
@@ -19,8 +16,9 @@ using namespace std;
 Oscillateur::Oscillateur(const initializer_list<double>& liP,
                          const initializer_list<double>& liQ,
                          const initializer_list<double>& lia,
-                         const initializer_list<double>& liO)
-                        : P(liP), Q(liQ), a(~Vecteur(lia)), O(liO)
+                         const initializer_list<double>& liO,
+                         SupportADessin* support)
+                        : Dessinable(support), P(liP), Q(liQ), a(~Vecteur(lia)), O(liO)
                         {if(liP.size()!=liQ.size()){
                           Erreur err("dimension", "Oscillateur::Oscillateur(const initializer_list<double>& x4)",
                     		             "Les dimensions des vecteurs 'parametre' et 'vitesse' doivent être les mêmes (ici : "+to_string(liP.size())+" et "+to_string(liQ.size())+")");
@@ -111,8 +109,9 @@ Pendule::Pendule(const std::initializer_list<double>& liP,
                  const std::initializer_list<double>& liQ,
                  const std::initializer_list<double>& lia,
                  const std::initializer_list<double>& liO,
-                 double longueur, double masse, double frottement)
-                 : Oscillateur(liP, liQ, lia, liO), L(longueur), m(masse), frott(frottement) //TODO ERREUR : dimensions, a*g=0
+                 double longueur, double masse, double frottement,
+                 SupportADessin* support)
+                 : Oscillateur(liP, liQ, lia, liO, support), L(longueur), m(masse), frott(frottement) //TODO ERREUR : dimensions, a*g=0
                  {} //TODO question : comment catcher une erreur lancée par le constructeur de Oscillateur ?
 
 unique_ptr<Pendule> Pendule::clone() const{
@@ -123,6 +122,11 @@ unique_ptr<Oscillateur> Pendule::copie() const{
   return clone();
 }
 
+void Pendule::dessine(){
+  if(support!=nullptr){
+    support->dessine(*this);
+  }
+}
 
 //fonction d'évolution
 Vecteur Pendule::f(const double& t) const{
@@ -135,6 +139,15 @@ Vecteur Pendule::position() const {
   return retour;
 }
 
+// permet l'affichage d'un oscillateur de façon standardisée //
+ostream& Pendule::affiche(ostream& sortie) const{
+  sortie << "# Pendule :" << endl;
+  sortie << P << " # parametre (angle)" << endl;
+  sortie << Q << " # vitesse angulaire" << endl;
+  sortie << position() << "# position" << endl;
+  return sortie;
+}
+
 /*##############################################################################
 ###                                                                          ###
 ###                    METHODES DE LA CLASSE Ressort                         ###
@@ -145,9 +158,10 @@ Ressort::Ressort(const std::initializer_list<double>& liP,
                  const std::initializer_list<double>& liQ,
                  const std::initializer_list<double>& lia,
                  const std::initializer_list<double>& liO,
-                 double raideur,double masse, double frottement)
-                    :Oscillateur(liP,liQ,lia,liO)//TODO ERREUR
-                    ,k(raideur), m(masse), frott(frottement){}
+                 double raideur,double masse, double frottement,
+                 SupportADessin* support)
+                  : Oscillateur(liP,liQ,lia,liO, support)//TODO ERREUR
+                  ,k(raideur), m(masse), frott(frottement){}
 
 unique_ptr<Ressort> Ressort::clone() const{
   return unique_ptr<Ressort>(new Ressort(*this));
@@ -155,6 +169,12 @@ unique_ptr<Ressort> Ressort::clone() const{
 
 unique_ptr<Oscillateur> Ressort::copie() const{
   return clone();
+}
+
+void Ressort::dessine(){
+  if(support!=nullptr){
+    support->dessine(*this);
+  }
 }
 
 //fonction d'évolution
@@ -165,4 +185,13 @@ Vecteur Ressort::f(const double& t) const{
 //retourne la position d'un ressort
 Vecteur Ressort::position()const{
     return O + P.get_coord(1)*a;
+}
+
+// permet l'affichage d'un oscillateur de façon standardisée //
+ostream& Ressort::affiche(ostream& sortie) const{
+  sortie << "# Ressort :" << endl;
+  sortie << P << " # parametre (distance de l'origine)" << endl;
+  sortie << Q << " # vitesse" << endl;
+  sortie << position() << "# position" << endl;
+  return sortie;
 }

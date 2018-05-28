@@ -1,11 +1,13 @@
 #include <iostream>
-#include "Vecteur.h"
-#include "Oscillateur.h"
 #include "Integrateur.h"
 using namespace std;
 
 int main(){
+<<<<<<< HEAD
   try{
+=======
+  /*
+>>>>>>> 0d48cbaa428e492e91aa135dc5e061df02e6c79f
   Pendule p({M_PI/3});
   Ressort r({1});
   double dt=0.01, t=0;
@@ -16,6 +18,7 @@ int main(){
     ec.evolue();
     cout << r.position().get_coord(1) << " " << dt*i+t << " # parametre" << endl;
   }
+<<<<<<< HEAD
   cout << endl<<endl<<endl;
   //test de Newmark
   IntegrateurNewmark en(r,dt,t);
@@ -48,5 +51,9 @@ for(int i(1); i<=10;i++){
 catch(Erreur err){
   err.affiche("testIntegrateur.cc");
 }
+=======
+*/
+  cout << 3 << endl;
+>>>>>>> 0d48cbaa428e492e91aa135dc5e061df02e6c79f
   return 0;
 }

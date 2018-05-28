@@ -1,17 +1,16 @@
 #include <iostream>
-#include "Oscillateur.h"
-#include "Vecteur.h"
+#include "TextViewer.h"
 #include "Integrateur.h"
 #include <cmath>
 using namespace std;
 
 int main(){
   try{
-    Pendule p({M_PI/2},{0.0},{0.0},{0.0},1.0, 1.0, 0.0);
-    IntegrateurEulerCromer euler(p, 0.1, 0);
+    Pendule p({M_PI/2});
+    IntegrateurEulerCromer euler;
     for(int i(1);i<=100;i++){
-      euler.evolue();
-      cout << euler << endl;
+      euler.evolue(p,0.1);
+      cout << p << endl;
     }
     IntegrateurRungeKutta rk(p, 0.1, 0);
     for(int i(1);i<=100;i++){

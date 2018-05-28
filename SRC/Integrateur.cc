@@ -1,8 +1,6 @@
 #include <iostream>
 #include <memory>
 #include "Integrateur.h"
-#include "Oscillateur.h"
-#include "Vecteur.h"
 using namespace std;
 
 /*##############################################################################
@@ -11,32 +9,6 @@ using namespace std;
 ###                                                                          ###
 ##############################################################################*/
 
-//#############################  constructeurs  ##############################//
-// construit un intégrateur en initilisant tous ses attributs
-Integrateur::Integrateur(Oscillateur const& osc, const double& pdt, const double t)
-                        : osc(osc.copie()), pdt(pdt), t_abs(t) {}
-
-
-//##############################  accesseurs  ################################//
-// retourne le temps absolu de l'intégrateur
-double Integrateur::get_t() const{
-  return t_abs;
-}
-
-// retourne l'oscillateur associé à l'intégrateur
-unique_ptr<Oscillateur> Integrateur::get_osc() const{   //TODO pas une bonne solution mais ne peut pas retourner d'oscillateur (classe abstraite)
-  return osc->copie();
-}
-
-
-//############################  autres méthodes  #############################//
-// permet l'affichage standard : sortie << integrateur;
-ostream& Integrateur::affiche(ostream& sortie) const{
-  sortie << "# Integrateur, \"pas de temps\" : " << pdt << endl;
-  sortie << t_abs << " # temps absolu" << endl;
-  sortie << *osc;
-  return sortie;
-}
 
 
 
@@ -46,10 +18,6 @@ ostream& Integrateur::affiche(ostream& sortie) const{
 ###                                                                          ###
 ##############################################################################*/
 
-// permet l'affichage standard : sortie << integrateur; //
-ostream& operator<<(ostream& sortie, const Integrateur& integrat){
-	return integrat.affiche(sortie);
-}
 
 
 
@@ -60,15 +28,18 @@ ostream& operator<<(ostream& sortie, const Integrateur& integrat){
 ##############################################################################*/
 
 
-// construit un intégrateur Euler-Cromer en initilisant tous ses attributs
-IntegrateurEulerCromer::IntegrateurEulerCromer(Oscillateur const& osc, const double& pdt, const double t)
-                                              : Integrateur(osc,pdt,t) {}
+unique_ptr<IntegrateurEulerCromer> IntegrateurEulerCromer::clone() const{
+  return unique_ptr<IntegrateurEulerCromer>(new IntegrateurEulerCromer(*this));
+}
+
+unique_ptr<Integrateur> IntegrateurEulerCromer::copie() const{
+  return clone();
+}
 
 // spécialisation de la méthode "evolue()" de la super-classe, avance d'un pas de temps avec la méthode d'intégration d'Euler-Cromer
-void IntegrateurEulerCromer::evolue(){
-  osc->set_Q(osc->get_Q()+pdt*osc->f());
-  osc->set_P(osc->get_P()+pdt*osc->get_Q());
-  t_abs+=pdt;
+void IntegrateurEulerCromer::evolue(Oscillateur& osc, double dt){
+  osc.set_Q(osc.get_Q()+dt*osc.f());
+  osc.set_P(osc.get_P()+dt*osc.get_Q());
 }
 
 

@@ -2,14 +2,16 @@
 #include <initializer_list>
 #include <memory>
 #include "Vecteur.h"
+#include "Dessinable.h"
 
-class Oscillateur{
+class Oscillateur : public Dessinable {
   public:
     //constructeurs
     explicit Oscillateur(const std::initializer_list<double>& liP, //construit un Oscillateur avec son origine et son axe
                          const std::initializer_list<double>& liQ,
                          const std::initializer_list<double>& lia={1,0,0},
-                         const std::initializer_list<double>& liO={0,0,0});
+                         const std::initializer_list<double>& liO={0,0,0},
+                         SupportADessin* support=nullptr);
     virtual ~Oscillateur(){}
     virtual std::unique_ptr<Oscillateur> copie() const = 0;
     //accesseurs
@@ -25,7 +27,7 @@ class Oscillateur{
     //autres opérations
     virtual Vecteur f(const double& t=0) const = 0; // fonction P''=f(t,P,P') : détermine le mouvement de l'oscillateur
     virtual Vecteur position() const = 0;
-    std::ostream& affiche(std::ostream& sortie) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
+    virtual std::ostream& affiche(std::ostream& sortie) const; // permet permet d'afficher le vecteur par composants sur un flot de sortie
 
   protected:
     //attributs
@@ -44,14 +46,16 @@ public:
                    const std::initializer_list<double>& liQ={0},
                    const std::initializer_list<double>& lia={1,0,0},
                    const std::initializer_list<double>& liO={0,0,0},
-                   double longueur=1, double masse=1, double frottement=0);
+                   double longueur=1, double masse=1, double frottement=0,
+                   SupportADessin* support=nullptr);
   virtual ~Pendule(){}
   std::unique_ptr<Pendule> clone() const;
   virtual std::unique_ptr<Oscillateur> copie() const override;
-
+  virtual void dessine() override;
   //autres opérations
   virtual Vecteur f(const double& t) const override;
   virtual Vecteur position() const override;
+  virtual std::ostream& affiche(std::ostream& sortie) const override; // permet permet d'afficher le vecteur par composants sur un flot de sortie
 
 private:
   double L;
@@ -66,14 +70,16 @@ public:
                    const std::initializer_list<double>& liQ={0},
                    const std::initializer_list<double>& lia={1,0,0},
                    const std::initializer_list<double>& liO={0,0,0},
-                   double raideur=1, double masse=1, double frottement=0);
+                   double raideur=1, double masse=1, double frottement=0,
+                   SupportADessin* support=nullptr);
   virtual ~Ressort(){}
   std::unique_ptr<Ressort> clone() const;
   virtual std::unique_ptr<Oscillateur> copie() const override;
-
+  virtual void dessine() override;
   //autre fonctions
   virtual Vecteur f(const double& t) const override;
   virtual Vecteur position() const override;
+  virtual std::ostream& affiche(std::ostream& sortie) const override; // permet permet d'afficher le vecteur par composants sur un flot de sortie
 
 private:
   double k;
