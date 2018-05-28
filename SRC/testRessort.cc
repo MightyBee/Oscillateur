@@ -13,6 +13,16 @@ int main(){
       euler.evolue();
       cout << euler << endl;
     }
+    Ressort r2;
+    cout << r2.position() << endl;
+    cout << r2.get_angleNutation() << endl;
+    IntegrateurNewmark nmk(r2, 0.1, 0);
+    for(int i(1);i<=100;i++){
+      nmk.evolue();
+      cout << nmk << endl;
+    }
+    
+
   }catch(Erreur err){
     err.affiche("testRessort.cc");
   }

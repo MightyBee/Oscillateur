@@ -44,8 +44,7 @@ int main(){
 	Vecteur v9(2,3,5);
 	if (v7!=v9){
 		cout << v9 << "différent de" << v7 << endl;
-	} // je veux voir si != est compris automatiquement
-	//conclustion != n'est pas compris automatiquement :)
+	}
 
 	Vecteur v10(1,1,1);
 	v10+=v7;
